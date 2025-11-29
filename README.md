@@ -1,0 +1,2 @@
+# pozoristeIS
+Informacioni sistem pozorišta
