@@ -1,0 +1,101 @@
+\section{Slučaj upotrebe: Prodaja karata uživo}
+
+\subsection*{Kratak opis}
+Gledalac kupuje karte za pozorište putem interneta. Sistem ažurira broj dostupnih karata i izdaje potvrdu gledaocu putem mejla.
+
+\subsection*{Akteri}
+\begin{itemize}
+    \item \textbf{Gledalac} -- osoba koja želi da kupi karte za predstavu na blagajni.
+     \item \textbf{Blagajnik} -- prodaje karte i evidentira transakciju u sistemu.
+\end{itemize}
+
+\subsection*{Preduslovi}
+\begin{itemize}
+    \item Blagajnik je prijavljen i ovlašćen da koristi sistem.
+    \item Sistem je ispravan.
+\end{itemize}
+
+\subsection*{Osnovni tok}
+\begin{enumerate}
+    \item Gledalac dolazi na blagajnu i navodi predstavu i termin za koji želi da kupi karte.
+    \item Blagajnik bira opciju za novu kupovinu.
+    \item Sistem započinje novu kupovinu.
+    \item Blagajnik bira predstavu i termin.
+    \item Sistem prikazuje dostupna mesta i cene karata.
+    \item Gledalac bira sedište.
+    \item Blagajnik potvrđuje izbor.
+    \item Sistem prikazuje ukupan iznos i opcije plaćanja.
+    \item Blagajnik pita Gledalac da li mu treba gotovinski račun:
+    \begin{itemize}
+        \item Ukoliko Gledalac traži gotovinski račun $\rightarrow$ Izvršava se podtok \textbf{P1}.
+    \end{itemize}
+    \item Gledalac bira način plaćanja:
+    \begin{itemize}
+        \item Ukoliko Gledalac bira plaćanje gotovinom $\rightarrow$ Izvršava se podtok \textbf{P2}.
+        \item Ukoliko Gledalac bira plaćanje karticom $\rightarrow$ Izvršava se podtok \textbf{P3}.
+    \end{itemize}
+    \item Blagajnik zaključuje račun.
+    \item Sistem evidentira transakciju i automatski uključuje slučaj upotrebe \textbf{"Evidencija prihoda"}.
+    \item Sistem ažurira broj slobodnih mesta.
+    \item Sistem izdaje račun.
+    \item Blagajnik predaje račun i karte Gledaocu.
+\end{enumerate}
+
+\subsection*{Podtokovi}
+
+\textbf{P1: Gotovinski račun}
+\begin{enumerate}[label=P1.\arabic*]
+    \item Gledalac daje PIB firme.
+    \item Blagajnik unosi PIB firme u sistem.
+\end{enumerate}
+
+\textbf{P2: Plaćanje gotovinom}
+\begin{enumerate}[label=P2.\arabic*]
+    \item Gledalac predaje novac Blagajniku.
+    \item Blagajnik unosi iznos u sistem.
+    \item Sistem računa kusur i prikazuje ga.
+    \item Blagajnik vraća kusur.
+\end{enumerate}
+
+\textbf{P3: Plaćanje karticom }
+\begin{enumerate}[label=P3.\arabic*]
+    \item Blagajnik označava opciju za plaćanje karticom.
+    \item Blagajnik pruža terminal Gledaocu.
+    \item Gledalac prislanja ili ubacuje karticu i unosi PIN.
+    \item Sistem šalje zahtev banci i čeka potvrdu.
+    \item \textbf{Provera statusa transakcije:}
+    \begin{itemize}
+        \item \textbf{Uspešna:} Sistem evidentira plaćanje i tok se vraća na korak 11 Osnovnog toka.
+        \item \textbf{Neuspešna:} Sistem prikazuje grešku. Blagajnik pita kupca da li želi da pokuša ponovo.
+        \begin{itemize}
+            \item Ako Gledalac želi ponovni pokušaj $\rightarrow$ Povratak na korak P3.3.
+            \item Ako Gledalac želi drugi način plaćanja $\rightarrow$ Povratak na korak 10 Osnovnog toka.
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+
+
+\subsection*{Postuslovi}
+\begin{itemize}
+    \item Gledalac je uspešno kupio karte.
+    \item Sistem je ažurirao broj dostupnih karata.
+\end{itemize}
+
+\subsection*{Alternativni tokovi}
+
+\textbf{A1: Nema dostupnih karata}
+ \begin{itemize}
+ \item Sistem obaveštava gledaoca da nema dostupnih karata za izabranu predstavu u izabranom terminu i Gledalac  traži novi termin slučaj se vraća na korak 4.
+\end{itemize}
+
+\textbf{A2: Kupac odustaje od kupovine}
+\begin{itemize}
+\item Ovaj tok se može desiti u bilo kom trenutku pre zaključivanja računa.
+Blagajnik bira opciju "Otkaži transakciju". Sistem oslobađa eventualno rezervisana sedišta.
+Slučaj upotrebe se završava neuspešno.
+\end{itemize}
+
+
+
+%\subsection*{Dodatne informacije}
