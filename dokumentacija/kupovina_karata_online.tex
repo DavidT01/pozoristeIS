@@ -1,0 +1,57 @@
+\section{Slučaj upotrebe: Prodaja karata online}
+
+\subsection*{Kratak opis}
+Gledalac kupuje karte za pozorište putem interneta. Sistem ažurira broj dostupnih karata i izdaje potvrdu gledaocu putem mejla.
+
+\subsection*{Akteri}
+\begin{itemize}
+    \item \textbf{Gledalac} -- osoba koja želi da kupi karte za predstavu putem online sistema.
+\end{itemize}
+
+\subsection*{Preduslovi}
+\begin{itemize}
+    \item Gledalac ima pristup internetu.
+    \item Gledalac ima validnu kreditnu ili debitnu karticu za plaćanje.
+\end{itemize}
+
+\subsection*{Osnovni tok}
+\begin{enumerate}
+    \item Gledalac pristupa online sistemu pozorišta.
+    \item Gledalac bira predstavu za koju želi da kupi karte.
+    \item Sistem prikazuje dostupne termine.
+    \item Gledalac bira termin.
+    \item Sistem prikazuje dostupna sedišta i cene karata.
+    \item Gledalac bira željena sedišta.
+    \item Sistem prikazuje ukupnu cenu i traži od gledaoca da potvrdi kupovinu.
+    \item Gledalac potvrđuje kupovinu.
+    \item Sistem prikazuje formu za unos podataka o plaćanju.
+    \item Gledalac unosi podatke o plaćanju i potvrđuje transakciju.
+    \item Sistem evidentira transakciju i automatski uključuje slučaj upotrebe \textbf{"Evidencija prihoda"}.
+    \item Sistem ažurira broj dostupnih karata za predstavu u izabranom terminu.
+    \item Sistem generiše i šalje potvrdu o kupovini gledaocu.
+    \item Gledalac dobija mejl sa detaljima o kupovini.
+\end{enumerate}
+
+\subsection*{Postuslovi}
+\begin{itemize}
+    \item Gledalac je uspešno kupio karte.
+    \item Sistem je ažurirao broj dostupnih karata.
+    \item Gledalac je primio potvrdu o kupovini putem mejla.
+\end{itemize}
+
+\subsection*{Alternativni tokovi}
+
+\textbf{A1: Plaćanje nije uspešno}
+\begin{itemize}
+    \item Sistem obaveštava gledaoca o neuspešnom plaćanju. Gledalac se vraća na korak 7 i može ponovo uneti podatke o plaćanju ili odustati od kupovine čime se slučaj upotrebe završava.
+\end{itemize}
+
+\textbf{A2: Nema dostupnih karata}
+\begin{itemize}
+    \item Sistem obaveštava gledaoca da nema dostupnih karata za izabranu predstavu u izabranom terminu i slučaj se vraća na korak 3.
+\end{itemize}
+
+\subsection*{Dodatne informacije}
+\begin{itemize}
+    \item U koraku 10 gledalac unosi ime, prezime, mejl, broj kartice, datum isteka kartice i CVV kod.
+\end{itemize}
