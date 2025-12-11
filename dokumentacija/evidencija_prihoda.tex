@@ -1,0 +1,41 @@
+\section{Slučaj upotrebe: Evidencija prihoda}
+
+\subsection*{Kratak opis}
+ Sistem automatski beleži finansijske detalje transakcije u centralnu bazu radi finansijskog izveštavanja.
+
+\subsection*{Akteri}
+\begin{itemize}
+   \item \textbf{Sistem} -- izvršava proces automatski.
+    \item \textbf{Finansijski službenik} -- ima uvid u evidentirane podatke (pasivan učesnik u trenutku izvršenja).
+\end{itemize}
+
+\subsection*{Preduslovi}
+\begin{itemize}
+  \item Roditeljski slučaj upotrebe (npr. Prodaja karata) je uspešno autorizovao plaćanje.
+    \item Podaci o transakciji su dostupni.
+\end{itemize}
+
+\subsection*{Osnovni tok}
+\begin{enumerate}
+    \item Sistem preuzima parametre transakcije iz roditeljskog procesa (iznos, datum, vreme, način plaćanja).
+    \item Sistem klasifikuje prihod prema načinu plaćanja (Gotovina / Kartica / Online).
+    \item Sistem upisuje transakciju u Dnevnik prihoda (Ledger).
+    \item Sistem ažurira trenutno stanje blagajne (ako je gotovina) ili virtuelnog računa (ako je kartica).
+    \item Sistem generiše jedinstveni ID transakcije za potrebe revizije.
+    \item Slučaj upotrebe se završava i kontrola se vraća roditeljskom procesu.
+\end{enumerate}
+
+\subsection*{Postuslovi}
+\begin{itemize}
+    \item Transakcija je trajno sačuvana u finansijskoj bazi podataka.
+    \item Finansijski izveštaji su ažurirani novim iznosom.
+\end{itemize}
+
+\subsection*{Alternativni tokovi}
+
+\textbf{A1: Greška pri upisu u bazu}
+\begin{itemize}
+    \item Ukoliko baza podataka nije dostupna, Sistem privremeno čuva podatke o transakciji u lokalni log fajl (cache).Sistem šalje notifikaciju Administratoru o grešci.
+ Sistem vraća potvrdu roditeljskom procesu da je prodaja uspela (kako ne bi blokirao kupca), uz napomenu da će evidencija kasniti. Po uspostavljanju veze, sistem naknadno sinhronizuje podatke.
+\end{itemize}
+
