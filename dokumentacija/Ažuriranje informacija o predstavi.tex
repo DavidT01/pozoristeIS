@@ -1,0 +1,60 @@
+\textbackslash section*\{Slučaj upotrebe: Ažuriranje informacija o
+predstavi\}
+
+\textbackslash subsection*\{Kratak opis\} Reditelj ažurira informacije o
+predstavi i prosleđuje administratoru radi unošenja tih podataka u
+sistem.
+
+\textbackslash subsection*\{Akteri\} \textbackslash begin\{enumerate\}
+\textbackslash item \textbackslash textbf\{Reditelj\} -\/- pravi
+potrebne izmene za predstavu \textbackslash item
+\textbackslash textbf\{Administrator\} -\/- unosi izmene koje je dobio
+od reditelja u sistem \textbackslash item
+\textbackslash textbf\{Sistem\} -\/- izvršava se automatski
+\textbackslash end\{enumerate\}
+
+\textbackslash subsection*\{Preduslovi\}
+\textbackslash begin\{enumerate\} \textbackslash item Roditeljski slučaj
+upotrebe je da je predstava već kreirana. \textbackslash item Novi
+podaci su dostupni. \textbackslash item Administrator je ulogovan u
+sistem i ima mogućnost da unese nove podatke.
+\textbackslash end\{enumerate\}
+
+\textbackslash subsection*\{Osnovni tok\}
+\textbackslash begin\{enumerate\} \textbackslash item Reditelj je
+odlučio da napravi neke izmene vezane za predstavu (npr. promena glumca,
+trajanja predstave, itd.). \textbackslash item Dostavlja izmene
+administratoru. \textbackslash item Administrator se loguje u sistem.
+\textbackslash item Administrator nalazi predstavu i unosi nove podatke.
+\textbackslash item Sistem proverava da li je validan unos novih
+podataka. \textbackslash item Administrator dobija potvrdu da li su novi
+podaci validni. \textbackslash item Administrator odlučuje da sačuva
+nove izmene. \textbackslash item Sistem čuva nove izmene.
+\textbackslash end\{enumerate\}
+
+\textbackslash subsection*\{Postuslovi\}
+\textbackslash begin\{enumerate\} \textbackslash item Izmene su
+sačuvane. \textbackslash item Administrator proverava da li je sve
+sačuvano kako treba. \textbackslash item Administrator obaveštava
+reditelja da su nove izmene unete. \textbackslash item Reditelj
+proverava nove izmene. \textbackslash end\{enumerate\}
+
+\textbackslash subsection*\{Alternativni tokovi\}
+
+\textbackslash subsubsection*\{A1: Reditelj je odlučio da napravi izmene
+koje nisu u skladu sa sistemom\} \textbackslash begin\{enumerate\}
+\textbackslash item Reditelj je uneo podatke. \textbackslash item
+Dostavio ih je administratoru. \textbackslash item Administrator ih
+unosi u bazu. \textbackslash item Sistem obaveštava administratora da
+podaci nisu validni. \textbackslash item Administrator obaveštava
+reditelja da podaci nisu validni i prekida sa unošenjem izmena.
+\textbackslash end\{enumerate\}
+
+\textbackslash subsubsection*\{A2: Reditelj je dostavio ispravne
+podatke, administrator ih je uneo pogrešno\}
+\textbackslash begin\{enumerate\} \textbackslash item Administrator je
+uneo neispravne podatke. \textbackslash item Sistem obaveštava
+administratora da podaci nisu ispravni. \textbackslash item
+Administrator proverava podatke i ispravlja ih. \textbackslash item
+Novouneti ispravni podaci se čuvaju u sistemu.
+\textbackslash end\{enumerate\}
