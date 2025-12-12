@@ -1,0 +1,37 @@
+\section{Slučaj upotrebe: Zakazivanje termina}
+
+\subsection*{Kratak opis}
+Administrator određeni termin(datum + satnica) dodeljuje određenoj predstavi, označava da li se termin odnosi na probu ili izvedbu predstave.
+
+\subsection*{Akteri}
+\begin{itemize}
+    \item \textbf{Adminstrator} -- osoba koja vrši zakazivanje termina.
+\end{itemize}
+\subsection*{Preduslovi}
+\begin{itemize}
+    \item  U sistemu postoji bar 1 predstava.
+\end{itemize}
+\subsection*{Osnovni tok}
+\begin{enumerate}
+    \item Administrator pristupa sistemu pozorišta.
+    \item Administrator bira predstavu za koju hoće da zakaže termin.
+    \item Sistem prikazuje dostupne datume.
+    \item Administrator bira datum.
+    \item Sistem prikazuje dostupnu satnicu za izabrani datum.
+    \item Administrator bira satnicu za izabrani datum.
+    \item Administrator bira da li se termin odnosi na probu ili izvedbu predstave.
+    \item Sistem ažurira stanje izabranog termina.
+    \item Sistem prikazuje poruku o uspešnom zakazivanju termina.
+\end{enumerate}
+\subsection*{Postuslovi}
+\begin{itemize}
+    \item Ažurirano je stanje izabranog termina.
+\end{itemize}
+
+\subsection*{Alternativni tokovi}
+\textbf{A1: Nema slobodnih termina}
+\begin{itemize}
+    \item Sistem izbacuje poruku kako nema slobodnih termina. Prikazuje se dugme OK slučaj se završava.
+\end{itemize}
+
+
