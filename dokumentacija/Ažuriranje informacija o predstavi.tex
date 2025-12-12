@@ -1,0 +1,59 @@
+\section*{Slučaj upotrebe: Ažuriranje informacija o predstavi}
+
+\subsection*{Kratak opis}
+
+Reditelj ažurira informacije o predstavi i prosleđuje administratoru
+radi unošenja tih podataka u sistem.
+
+\subsection*{Akteri}
+\begin{enumerate}
+    \item \textbf{Reditelj} -- pravi potrebne izmene za predstavu
+    \item \textbf{Administrator} -- unosi izmene koje je dobio od reditelja u sistem
+    \item \textbf{Sistem} -- izvršava se automatski
+\end{enumerate}
+
+\subsection*{Preduslovi}
+\begin{enumerate}
+    \item Roditeljski slučaj upotrebe je da je predstava već kreirana.
+    \item Novi podaci su dostupni.
+    \item Administrator je ulogovan u sistem i ima mogućnost da unese nove podatke.
+\end{enumerate}
+
+\subsection*{Osnovni tok}
+\begin{enumerate}
+    \item Reditelj je odlučio da napravi neke izmene vezane za predstavu (npr. promena glumca, trajanja predstave, itd.).
+    \item Dostavlja izmene administratoru.
+    \item Administrator se loguje u sistem.
+    \item Administrator nalazi predstavu i unosi nove podatke.
+    \item Sistem proverava da li je validan unos novih podataka.
+    \item Administrator dobija potvrdu da li su novi podaci validni.
+    \item Administrator odlučuje da sačuva nove izmene.
+    \item Sistem čuva nove izmene.
+\end{enumerate}
+
+\subsection*{Postuslovi}
+\begin{enumerate}
+    \item Izmene su sačuvane.
+    \item Administrator proverava da li je sve sačuvano kako treba.
+    \item Administrator obaveštava reditelja da su nove izmene unete.
+    \item Reditelj proverava nove izmene.
+\end{enumerate}
+
+\subsection*{Alternativni tokovi}
+
+\subsubsection*{A1: Reditelj je odlučio da napravi izmene koje nisu u skladu sa sistemom}
+\begin{enumerate}
+    \item Reditelj je uneo podatke.
+    \item Dostavio ih je administratoru.
+    \item Administrator ih unosi u bazu.
+    \item Sistem obaveštava administratora da podaci nisu validni.
+    \item Administrator obaveštava reditelja da podaci nisu validni i prekida sa unošenjem izmena.
+\end{enumerate}
+
+\subsubsection*{A2: Reditelj je dostavio ispravne podatke, administrator ih je uneo pogrešno}
+\begin{enumerate}
+    \item Administrator je uneo neispravne podatke.
+    \item Sistem obaveštava administratora da podaci nisu ispravni.
+    \item Administrator proverava podatke i ispravlja ih.
+    \item Novouneti ispravni podaci se čuvaju u sistemu.
+\end{enumerate}
