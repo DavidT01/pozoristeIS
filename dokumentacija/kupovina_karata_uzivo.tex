@@ -1,8 +1,6 @@
 \section{Slučaj upotrebe: Prodaja karata uživo}
 
 \subsection*{Kratak opis}
-Gledalac kupuje karte za pozorište putem interneta. Sistem ažurira broj dostupnih karata i izdaje potvrdu gledaocu putem mejla.
-
 \subsection*{Akteri}
 \begin{itemize}
     \item \textbf{Gledalac} -- osoba koja želi da kupi karte za predstavu na blagajni.
@@ -22,10 +20,8 @@ Gledalac kupuje karte za pozorište putem interneta. Sistem ažurira broj dostup
     \item Sistem započinje novu kupovinu.
     \item Blagajnik bira predstavu i termin.
     \item Sistem prikazuje dostupna mesta i cene karata.
-    \item Gledalac bira sedište.
     \item Blagajnik potvrđuje izbor.
     \item Sistem prikazuje ukupan iznos i opcije plaćanja.
-    \item Blagajnik pita Gledalac da li mu treba gotovinski račun:
     \begin{itemize}
         \item Ukoliko Gledalac traži gotovinski račun $\rightarrow$ Izvršava se podtok \textbf{P1}.
     \end{itemize}
@@ -86,7 +82,6 @@ Gledalac kupuje karte za pozorište putem interneta. Sistem ažurira broj dostup
 
 \textbf{A1: Nema dostupnih karata}
  \begin{itemize}
- \item Sistem obaveštava gledaoca da nema dostupnih karata za izabranu predstavu u izabranom terminu i Gledalac  traži novi termin slučaj se vraća na korak 4.
 \end{itemize}
 
 \textbf{A2: Kupac odustaje od kupovine}
