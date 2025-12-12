@@ -3,41 +3,23 @@
 \usepackage[T1]{fontenc}
 \usepackage[serbian]{babel}
 \usepackage{graphicx}
-\usepackage{enumitem}
-
-
-\title{Specifikacija Slučajeva Upotrebe}
-
 
 \date{}
 
 \begin{document}
 
+\input{./dokumentacija/kupovina_karata_uzivo.tex}
+
 \input{./dokumentacija/kupovina_karata_online.tex}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{./dijagrami/KupovinaKarataOnline.png}
-\end{figure}
-
-\newpage
-
-\input{dokumentacija/kupovina_karata_uzivo}
-\newpage
-\input{dokumentacija/evidencija_prihoda}
-\newpage
+\input{./dokumentacija/evidencija_prihoda.tex}
 
 \input{./dokumentacija/evidentiranje_tehnickih_potreba.tex}
 
 \input{./dokumentacija/narucivanje_opreme.tex}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{./dijagrami/EvidentiranjeTehničkihPotrebaINaručivanjeOpreme.png}
-\end{figure}
+\input{./dokumentacija/unos_novog_zaposlenog.tex}
 
 \input{./dokumentacija/zakazivanje_termina.tex}
-
-\input{./dokumentacija/unos_novog_zaposlenog.tex}
 
 \end{document}
