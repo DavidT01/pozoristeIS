@@ -1,0 +1,49 @@
+\section{Slučaj upotrebe: Pregled rashoda}
+
+\subsection*{Kratak opis}
+Finansijski službenik pregleda sve rashode pozorišta, uključujući plate zaposlenih, uplate za opremu i druge troškove.
+
+\subsection*{Akteri}
+\begin{itemize}
+    \item \textbf{Finansijski službenik} -- želi da prati finansijske troškove pozorišta.
+\end{itemize}
+
+\subsection*{Preduslovi}
+\begin{itemize}
+    \item Finansijski službenik je uspešno prijavljen na sistem.
+\end{itemize}
+
+\subsection*{Osnovni tok}
+\begin{enumerate}
+    \item Finansijski službenik bira opciju za pregled rashoda u glavnom meniju.
+    \item Sistem prikazuje formu za filtriranje rashoda.
+    \item Finansijski službenik unosi željene kriterijume.
+    \item Sistem pretražuje bazu podataka prema zadatim parametrima.
+    \item Sistem prikazuje listu pronađenih rashoda.
+    \item Finansijski službenik može odabrati pojedinačni rashod za detaljniji prikaz.
+    \item Sistem prikazuje sve detalje odabranog rashoda.
+\end{enumerate}
+
+\subsection*{Postuslovi}
+\begin{itemize}
+    \item Finansijski službenik je informisan o stanju rashoda.
+\end{itemize}
+
+\subsection*{Alternativni tokovi}
+
+\textbf{A1: Nema rezultata pretrage}
+\begin{itemize}
+    \item Ukoliko za zadate kriterijume ne postoje rashodi, sistem obaveštava službenika porukom "Nema pronađenih rashoda za zadate kriterijume". Finansijski službenik se vraća na korak 2 i može izmeniti kriterijume pretrage.
+\end{itemize}
+
+\subsection*{Dodatne informacije}
+\begin{itemize}
+    \item U koraku 2 službenik može filtrirati po datumu, vrsti troška, iznosu i primaocu.
+    \item U koraku 5 sistem prikazuje naziv, datum, vrstu i iznos rashoda, kao i primaoca.
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./dijagrami/pregled_rashoda.png} 
+    \caption{Dijagram slučaja upotrebe "Pregled rashoda"}
+\end{figure}
