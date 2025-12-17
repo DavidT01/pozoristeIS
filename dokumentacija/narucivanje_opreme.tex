@@ -26,8 +26,7 @@ Finansijski službenik naručuje potrebnu opremu za predstavu vodeći računa o 
     \item Sistem prikazuje evidentirane tehničke potrebe.
     \item Finansijski službenik bira potrebe koje želi da izmiri.
     \item Sistem prikazuje narudžbenicu sa ukupnim troškom nabavke.
-    \item Finansijski službenik proverava da li ukupan trošak nabavke prelazi budžet predstave.
-    \item Ako je trošak u granicama budžeta, finansijski službenik potvrđuje narudžbenicu.
+    \item Finansijski službenik potvrđuje narudžbenicu, ako je trošak u granicama budžeta.
     \item Sistem automatski evidentira transakciju.
     \item Sistem prikazuje potvrdu o uspešnoj narudžbini.
     \item Sistem uklanja tehničke potrebe koje su izmirene.
@@ -39,7 +38,12 @@ Finansijski službenik naručuje potrebnu opremu za predstavu vodeći računa o 
 
 \textbf{A1: Trošak prelazi budžet}
 \begin{itemize}
-    \item Sistem obaveštava finansijskog službenika da trošak premašuje budžet. Službenik se može vratiti na korak 3 ili odustati od naručivanja. U slučaju odustajanja, sistem obaveštava tehničko osoblje da potrebe premašuju budžet.
+    \item Ako u koraku 5 troškovi nisu u granicama budžeta, sistem obaveštava finansijskog službenika da trošak premašuje budžet. Slučaj se vraća na korak 2.
+\end{itemize}
+
+\textbf{A2: Plaćanje nije uspešno}
+\begin{itemize}
+    \item Ako u koraku 6 transakcija ne uspe, sistem obaveštava finansijskog službenika o neuspešnom plaćanju. Slučaj se vraća na korak 2.
 \end{itemize}
 
 \subsubsection*{Specijalni zahtevi: /}
