@@ -11,6 +11,12 @@ Administrator određeni termin(datum + satnica) dodeljuje određenoj predstavi, 
 \begin{itemize}
     \item  U sistemu postoji bar 1 predstava.
 \end{itemize}
+
+\subsubsection*{Postuslovi}
+\begin{itemize}
+    \item Ažurirano je stanje izabranog termina.
+\end{itemize}
+
 \subsubsection*{Osnovni tok}
 \begin{enumerate}
     \item Administrator pristupa sistemu pozorišta.
@@ -23,10 +29,8 @@ Administrator određeni termin(datum + satnica) dodeljuje određenoj predstavi, 
     \item Sistem ažurira stanje izabranog termina.
     \item Sistem prikazuje poruku o uspešnom zakazivanju termina.
 \end{enumerate}
-\subsubsection*{Postuslovi}
-\begin{itemize}
-    \item Ažurirano je stanje izabranog termina.
-\end{itemize}
+
+\subsubsection*{Podtokovi: /}
 
 \subsubsection*{Alternativni tokovi}
 \textbf{A1: Nema slobodnih termina}
@@ -34,11 +38,12 @@ Administrator određeni termin(datum + satnica) dodeljuje određenoj predstavi, 
     \item Sistem izbacuje poruku kako nema slobodnih termina. Prikazuje se dugme OK slučaj se završava.
 \end{itemize}
 
+\subsubsection*{Specijalni zahtevi: /}
+
+\subsubsection*{Dodatne informacije: /}
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{./dijagrami/zakazivanje_termina.png} 
 	\caption{Dijagram slučaja upotrebe "Zakazivanje termina"}
 \end{figure}
-
-
-
