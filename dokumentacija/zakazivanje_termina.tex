@@ -1,17 +1,17 @@
-\section{Slučaj upotrebe: Zakazivanje termina}
+\subsection{Slučaj upotrebe: Zakazivanje termina}
 
-\subsection*{Kratak opis}
+\subsubsection*{Kratak opis}
 Administrator određeni termin(datum + satnica) dodeljuje određenoj predstavi, označava da li se termin odnosi na probu ili izvedbu predstave.
 
-\subsection*{Akteri}
+\subsubsection*{Akteri}
 \begin{itemize}
     \item \textbf{Adminstrator} -- osoba koja vrši zakazivanje termina.
 \end{itemize}
-\subsection*{Preduslovi}
+\subsubsection*{Preduslovi}
 \begin{itemize}
     \item  U sistemu postoji bar 1 predstava.
 \end{itemize}
-\subsection*{Osnovni tok}
+\subsubsection*{Osnovni tok}
 \begin{enumerate}
     \item Administrator pristupa sistemu pozorišta.
     \item Administrator bira predstavu za koju hoće da zakaže termin.
@@ -23,12 +23,12 @@ Administrator određeni termin(datum + satnica) dodeljuje određenoj predstavi, 
     \item Sistem ažurira stanje izabranog termina.
     \item Sistem prikazuje poruku o uspešnom zakazivanju termina.
 \end{enumerate}
-\subsection*{Postuslovi}
+\subsubsection*{Postuslovi}
 \begin{itemize}
     \item Ažurirano je stanje izabranog termina.
 \end{itemize}
 
-\subsection*{Alternativni tokovi}
+\subsubsection*{Alternativni tokovi}
 \textbf{A1: Nema slobodnih termina}
 \begin{itemize}
     \item Sistem izbacuje poruku kako nema slobodnih termina. Prikazuje se dugme OK slučaj se završava.
@@ -39,5 +39,6 @@ Administrator određeni termin(datum + satnica) dodeljuje određenoj predstavi, 
 	\includegraphics[width=\textwidth]{./dijagrami/zakazivanje_termina.png} 
 	\caption{Dijagram slučaja upotrebe "Zakazivanje termina"}
 \end{figure}
+
 
 
