@@ -62,15 +62,8 @@ Gledalac kupuje karte za odabranu predstavu na blagajni.
     \item Blagajnik pruža terminal Gledaocu.
     \item Gledalac prislanja ili ubacuje karticu i unosi PIN.
     \item Sistem šalje zahtev banci i čeka potvrdu.
-    \item \textbf{Provera statusa transakcije:}
-    \begin{itemize}
-        \item \textbf{Uspešna:} Sistem evidentira plaćanje i tok se vraća na korak 11 Osnovnog toka.
-        \item \textbf{Neuspešna:} Sistem prikazuje grešku. Blagajnik pita kupca da li želi da pokuša ponovo.
-        \begin{itemize}
-            \item Ako Gledalac želi ponovni pokušaj $\rightarrow$ Povratak na korak P3.3.
-            \item Ako Gledalac želi drugi način plaćanja $\rightarrow$ Povratak na korak 10 Osnovnog toka.
-        \end{itemize}
-    \end{itemize}
+    \item Sistem dobija potvrdu o uspešnoj transakciji i evidentira plaćanje.
+    
 \end{enumerate}
 
 
@@ -91,6 +84,18 @@ Gledalac kupuje karte za odabranu predstavu na blagajni.
 \textbf{A2: Kupac odustaje od kupovine}
 \begin{itemize}
     \item Ovaj tok se može desiti u bilo kom trenutku pre zaključivanja računa. Blagajnik bira opciju "Otkaži transakciju". Sistem oslobađa eventualno rezervisana sedišta. Slučaj upotrebe se završava neuspešno.
+\end{itemize}
+
+\textbf{A3: Neuspešna transakcija karticom}
+\begin{itemize}
+    \item \textit{Ovaj tok se dešava u koraku P3.5 ukoliko banka odbije transakciju.}
+    \item Sistem prikazuje poruku o grešci (npr. pogrešan PIN, nedovoljno sredstava).
+    \item Blagajnik pita kupca da li želi da pokuša ponovo.
+    \begin{itemize}
+        \item Ako Gledalac želi ponovni pokušaj $\rightarrow$ Povratak na korak P3.3.
+        \item Ako Gledalac želi drugi način plaćanja $\rightarrow$ Povratak na korak 10 Osnovnog toka.
+        \item Ako Gledalac odustane $\rightarrow$ Prelazak na alternativni tok A2.
+    \end{itemize}
 \end{itemize}
 
 %\subsection*{Dodatne informacije}
