@@ -1,0 +1,82 @@
+\subsection{Slučaj upotrebe: Upravljanje finansijama}
+
+\subsubsection*{Kratak opis}
+Finansijski službenik upravlja finansijama pozorišta kroz pregled prihoda i rashoda, korekciju plata zaposlenih i generisanje finansijskih izveštaja.
+
+\subsubsection*{Akteri}
+\begin{itemize}
+    \item \textbf{Finansijski službenik} -- želi na jednostavan način da upravlja finansijama pozorišta.
+\end{itemize}
+
+\subsubsection*{Preduslovi}
+\begin{itemize}
+    \item Finansijski službenik je uspešno prijavljen na sistem.
+\end{itemize}
+
+\subsubsection*{Postuslovi}
+\begin{itemize}
+    \item Obavljeni su finansijski poslovi.
+\end{itemize}
+
+\subsubsection*{Osnovni tok}
+\begin{enumerate}
+    \item Finansijski službenik bira opciju za upravljanje finansijama.
+    \item Sistem prikazuje kontrolnu tablu sa trenutnim stanjem i opcijama: "Pregled transakcija", "Korekcija plata" i "Finansijski izveštaji".
+    \item Finansijski službenik bira jednu od ponuđenih opcija.
+    \item U zavisnosti od izbora, izvršava se jedan od podtokova (A, B ili C).
+\end{enumerate}
+
+\subsubsection*{Podtokovi}
+
+\textbf{A: Pregled transakcija}
+\begin{enumerate}
+    \item Sistem prikazuje formu za pretragu transakcija.
+    \item Službenik unosi kriterijume filtriranja (datum, iznos, tip).
+    \item Sistem prikazuje listu transakcija koje odgovaraju kriterijumima.
+\end{enumerate}
+
+\textbf{B: Korekcija plata}
+\begin{enumerate}
+    \item Sistem prikazuje listu zaposlenih sa trenutnim platama.
+    \item Službenik bira zaposlenog.
+    \item Sistem prikazuje formu za unos nove plate.
+    \item Službenik unosi novi iznos plate i objašnjenje.
+    \item Sistem proverava da li je povišica unutar dozvoljenog limita.
+    \item Sistem ažurira platu zaposlenog u bazi podataka.
+    \item Sistem obaveštava finansijskog službenika da je ažuriranje uspešno.
+\end{enumerate}
+
+\textbf{C: Finansijski izveštaji}
+\begin{enumerate}
+    \item Službenik bira tip izveštaja (mesečni, kvartalni, godišnji).
+    \item Sistem generiše izveštaj na osnovu podataka iz baze.
+    \item Sistem omogućava preuzimanje ili štampanje izveštaja.
+\end{enumerate}
+
+\subsubsection*{Alternativni tokovi}
+
+\textbf{A1: Nema rezultata pretrage}
+\begin{itemize}
+    \item Ako u koraku 3 podtoka A nema transakcija za zadate kriterijume, sistem ispisuje poruku o tome i slučaj se vraća na korak 1 podtoka A.
+\end{itemize}
+
+\textbf{B1: Prekoračenje limita za povišicu}
+\begin{itemize}
+    \item Ako u koraku 4 podtoka B finansijski službenik unese iznos koji prelazi dozvoljeni limit povišice, sistem prikazuje upozorenje: ''Povišica prelazi dozvoljeni limit.'' Slučaj se vraća na korak 3 podtoka B.
+\end{itemize}
+
+\subsubsection*{Specijalni zahtevi}
+\begin{itemize}
+    \item Sistem mora automatski beležiti ko je i kada izvršio promenu plate.
+\end{itemize}
+
+\subsubsection*{Dodatne informacije}
+\begin{itemize}
+    \item Limit za povišice je propisan zakonom.
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./Slučajevi upotrebe/upravljanje_finansijama.png} 
+    \caption{Dijagram slučaja upotrebe "Upravljanje finansijama"}
+\end{figure}
