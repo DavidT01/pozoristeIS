@@ -23,46 +23,89 @@ Finansijski službenik upravlja finansijama pozorišta kroz pregled prihoda i ra
     \item Finansijski službenik bira opciju za upravljanje finansijama.
     \item Sistem prikazuje kontrolnu tablu sa trenutnim stanjem i opcijama: "Pregled transakcija", "Korekcija plata" i "Finansijski izveštaji".
     \item Finansijski službenik bira jednu od ponuđenih opcija.
-    \item U zavisnosti od izbora, izvršava se jedan od podtokova (A, B ili C).
+    \item U zavisnosti od izbora, izvršava se jedan od podtokova (P1, P2 ili P3).
 \end{enumerate}
+Koraci 2-4 se ponavljaju dok finansijski službenik ne odluči da izađe iz modula za upravljanje finansijama klikom na dugme "Nazad", kada se ceo slučaj završava.
 
 \subsubsection*{Podtokovi}
 
-\textbf{A: Pregled transakcija}
+\textbf{P1: Pregled transakcija}
 \begin{enumerate}
     \item Sistem prikazuje formu za pretragu transakcija.
     \item Službenik unosi kriterijume filtriranja (datum, iznos, tip).
     \item Sistem prikazuje listu transakcija koje odgovaraju kriterijumima.
+    \item Ako finansijski službenik klikne na određenu transakciju
+    \begin{itemize}
+        \item Sistem prikazuje detalje izabrane transakcije.
+    \end{itemize}
+    \item Službenik bira opciju za vraćanje na kontrolnu tablu i slučaj se vraća na korak 2 osnovnog toka.
 \end{enumerate}
 
-\textbf{B: Korekcija plata}
+\textbf{P2: Korekcija plata}
 \begin{enumerate}
     \item Sistem prikazuje listu zaposlenih sa trenutnim platama.
     \item Službenik bira zaposlenog.
     \item Sistem prikazuje formu za unos nove plate.
     \item Službenik unosi novi iznos plate i objašnjenje.
-    \item Sistem proverava da li je povišica unutar dozvoljenog limita.
+    \item Sistem proverava da li je izmena unutar dozvoljenog limita.
     \item Sistem ažurira platu zaposlenog u bazi podataka.
     \item Sistem obaveštava finansijskog službenika da je ažuriranje uspešno.
 \end{enumerate}
+Koraci 1-7 se ponavljaju dok finansijski službenik ne odluči da izađe iz podtoka klikom na dugme "Nazad", čime se slučaj vraća na korak 2 osnovnog toka.
 
-\textbf{C: Finansijski izveštaji}
+\vspace{0.5cm}
+
+\textbf{P3: Finansijski izveštaji}
 \begin{enumerate}
     \item Službenik bira tip izveštaja (mesečni, kvartalni, godišnji).
     \item Sistem generiše izveštaj na osnovu podataka iz baze.
-    \item Sistem omogućava preuzimanje ili štampanje izveštaja.
+    \item Službenik bira opciju za vraćanje na kontrolnu tablu.
+    \item Sistem pita službenika da li želi da preuzme ili štampa izveštaj.
+    \begin{itemize}
+        \item Ako službenik izabere preuzimanje $\rightarrow$ izvršava se podtok P4.
+        \item Ako službenik izabere štampanje $\rightarrow$ izvršava se podtok P5.
+        \item Ako službenik izabere povratak bez preuzimanja ili štampanja $\rightarrow$ slučaj se vraća na korak 2 osnovnog toka.
+    \end{itemize}
+\end{enumerate}
+
+\textbf{P4: Preuzimanje izveštaja}
+\begin{enumerate}
+    \item Sistem prikazuje formu za preuzimanje izveštaja.
+    \item Službenik bira format (PDF, Excel).
+    \item Službenik unosi naziv fajla.
+    \item Službenik bira lokaciju za čuvanje fajla.
+    \item Sistem čuva izveštaj na izabranoj lokaciji.
+    \item Sistem obaveštava službenika da je izveštaj uspešno sačuvan.
+    \item Slučaj se vraća na korak 2 osnovnog toka.
+\end{enumerate}
+
+\textbf{P5: Štampanje izveštaja}
+\begin{enumerate}
+    \item Sistem prikazuje formu za štampanje izveštaja.
+    \item Službenik bira štampač.
+    \item Službenik podešava opcije štampe (broj primeraka, obostrano ili jednostrano štampanje i slično).
+    \item Službenik potvrđuje štampanje.
+    \item Sistem šalje izveštaj na štampač.
+    \item Sistem obaveštava službenika da je izveštaj poslat na štampu.
+    \item Službenik preuzima izveštaj sa štampača.
+    \item Slučaj se vraća na korak 2 osnovnog toka.
 \end{enumerate}
 
 \subsubsection*{Alternativni tokovi}
 
 \textbf{A1: Nema rezultata pretrage}
 \begin{itemize}
-    \item Ako u koraku 3 podtoka A nema transakcija za zadate kriterijume, sistem ispisuje poruku o tome i slučaj se vraća na korak 1 podtoka A.
+    \item Ako u koraku 3 podtoka P1 nema transakcija za zadate kriterijume, sistem ispisuje poruku o tome i slučaj se vraća na korak 1 podtoka P1.
 \end{itemize}
 
-\textbf{B1: Prekoračenje limita za povišicu}
+\textbf{A2: Prekoračenje limita za povišicu}
 \begin{itemize}
-    \item Ako u koraku 4 podtoka B finansijski službenik unese iznos koji prelazi dozvoljeni limit povišice, sistem prikazuje upozorenje: ''Povišica prelazi dozvoljeni limit.'' Slučaj se vraća na korak 3 podtoka B.
+    \item Ako u koraku 4 podtoka P2 finansijski službenik unese iznos koji prelazi dozvoljeni limit izmene plate, sistem prikazuje upozorenje: ''Povišica prelazi dozvoljeni limit.'' Slučaj se vraća na korak 3 podtoka P2.
+\end{itemize}
+
+\textbf{A3: Greška na štampaču}
+\begin{itemize}
+    \item Ako u koraku 5 podtoka P5 dođe do greške prilikom komunikacije sa štampačem, sistem prikazuje poruku o grešci i slučaj se vraća na korak 1 podtoka P5.
 \end{itemize}
 
 \subsubsection*{Specijalni zahtevi}
@@ -72,7 +115,7 @@ Finansijski službenik upravlja finansijama pozorišta kroz pregled prihoda i ra
 
 \subsubsection*{Dodatne informacije}
 \begin{itemize}
-    \item Limit za povišice je propisan zakonom.
+    \item Limit za izmenu plate je propisan zakonom.
 \end{itemize}
 
 \begin{figure}[h!]
