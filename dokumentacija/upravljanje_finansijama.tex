@@ -45,13 +45,12 @@ Koraci 2-4 se ponavljaju dok finansijski službenik ne odluči da izađe iz modu
 \begin{enumerate}
     \item Sistem prikazuje listu zaposlenih sa trenutnim platama.
     \item Službenik bira zaposlenog.
-    \item Sistem prikazuje formu za unos nove plate.
     \item Službenik unosi novi iznos plate i objašnjenje.
     \item Sistem proverava da li je izmena unutar dozvoljenog limita.
     \item Sistem ažurira platu zaposlenog u bazi podataka.
     \item Sistem obaveštava finansijskog službenika da je ažuriranje uspešno.
 \end{enumerate}
-Koraci 1-7 se ponavljaju dok finansijski službenik ne odluči da izađe iz podtoka klikom na dugme "Nazad", čime se slučaj vraća na korak 2 osnovnog toka.
+Koraci 1-6 se ponavljaju dok finansijski službenik ne odluči da izađe iz podtoka klikom na dugme "Nazad", čime se slučaj vraća na korak 2 osnovnog toka.
 
 \vspace{0.5cm}
 
@@ -70,10 +69,9 @@ Koraci 1-7 se ponavljaju dok finansijski službenik ne odluči da izađe iz podt
 
 \textbf{P4: Preuzimanje izveštaja}
 \begin{enumerate}
-    \item Sistem prikazuje formu za preuzimanje izveštaja.
     \item Službenik bira format (PDF, Excel).
-    \item Službenik unosi naziv fajla.
     \item Službenik bira lokaciju za čuvanje fajla.
+    \item Službenik unosi naziv fajla.
     \item Sistem čuva izveštaj na izabranoj lokaciji.
     \item Sistem obaveštava službenika da je izveštaj uspešno sačuvan.
     \item Slučaj se vraća na korak 2 osnovnog toka.
@@ -81,7 +79,6 @@ Koraci 1-7 se ponavljaju dok finansijski službenik ne odluči da izađe iz podt
 
 \textbf{P5: Štampanje izveštaja}
 \begin{enumerate}
-    \item Sistem prikazuje formu za štampanje izveštaja.
     \item Službenik bira štampač.
     \item Službenik podešava opcije štampe (broj primeraka, obostrano ili jednostrano štampanje i slično).
     \item Službenik potvrđuje štampanje.
@@ -100,12 +97,12 @@ Koraci 1-7 se ponavljaju dok finansijski službenik ne odluči da izađe iz podt
 
 \textbf{A2: Prekoračenje limita za povišicu}
 \begin{itemize}
-    \item Ako u koraku 4 podtoka P2 finansijski službenik unese iznos koji prelazi dozvoljeni limit izmene plate, sistem prikazuje upozorenje: ''Povišica prelazi dozvoljeni limit.'' Slučaj se vraća na korak 3 podtoka P2.
+    \item Ako u koraku 3 podtoka P2 finansijski službenik unese iznos koji prelazi dozvoljeni limit izmene plate, sistem prikazuje upozorenje: ''Povišica prelazi dozvoljeni limit.'' Slučaj se vraća na korak 3 podtoka P2.
 \end{itemize}
 
 \textbf{A3: Greška na štampaču}
 \begin{itemize}
-    \item Ako u koraku 5 podtoka P5 dođe do greške prilikom komunikacije sa štampačem, sistem prikazuje poruku o grešci i slučaj se vraća na korak 1 podtoka P5.
+    \item Ako u koraku 4 podtoka P5 dođe do greške prilikom komunikacije sa štampačem, sistem prikazuje poruku o grešci i slučaj se vraća na korak 1 podtoka P5.
 \end{itemize}
 
 \subsubsection*{Specijalni zahtevi}
