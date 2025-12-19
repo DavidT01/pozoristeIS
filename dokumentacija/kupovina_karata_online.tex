@@ -24,6 +24,7 @@ Gledalac kupuje karte za pozorište putem interneta. Sistem ažurira broj dostup
 \subsubsection*{Osnovni tok}
 \begin{enumerate}
     \item Gledalac pristupa online sistemu pozorišta.
+    \item Sistem prikazuje repertoar predstava.
     \item Gledalac bira predstavu za koju želi da kupi karte.
     \item Sistem prikazuje dostupne termine.
     \item Gledalac bira termin.
@@ -43,21 +44,21 @@ Gledalac kupuje karte za pozorište putem interneta. Sistem ažurira broj dostup
 
 \subsubsection*{Alternativni tokovi}
 
-\textbf{A1: Plaćanje nije uspešno}
+\textbf{A1: Nema dostupnih karata}
 \begin{itemize}
-    \item Ako u koraku 11 transakcija ne uspe, sistem obaveštava gledaoca o neuspešnom plaćanju. Gledalac se vraća na korak 7 i može ponovo uneti podatke o plaćanju ili odustati od kupovine čime se slučaj upotrebe završava.
+    \item Ako u koraku 5 gledalac izabere termin u kome nema slobodnih mesta, sistem obaveštava gledaoca da nema dostupnih karata za izabranu predstavu u izabranom terminu i slučaj se vraća na korak 4.
 \end{itemize}
 
-\textbf{A2: Nema dostupnih karata}
+\textbf{A2: Plaćanje nije uspešno}
 \begin{itemize}
-    \item Ako u koraku 4 gledalac izabere termin u kome nema slobodnih mesta, sistem obaveštava gledaoca da nema dostupnih karata za izabranu predstavu u izabranom terminu i slučaj se vraća na korak 3.
+    \item Ako u koraku 12 transakcija ne uspe, sistem obaveštava gledaoca o neuspešnom plaćanju. Gledalac se vraća na korak 8 i može ponovo uneti podatke o plaćanju ili odustati od kupovine čime se slučaj upotrebe završava.
 \end{itemize}
 
 \subsubsection*{Specijalni zahtevi: /}
 
 \subsubsection*{Dodatne informacije}
 \begin{itemize}
-    \item U koraku 10 gledalac unosi ime, prezime, mejl, broj kartice, datum isteka kartice i CVV kod.
+    \item U koraku 11 gledalac unosi ime, prezime, mejl, broj kartice, datum isteka kartice i CVV kod.
 \end{itemize}
 
 \begin{figure}[h!]
