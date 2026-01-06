@@ -1,0 +1,55 @@
+\section{Arhitektura sistema}
+
+Arhitekturu sistema je zasnovana na tipičnom višeslojnom pristupu za informacione sisteme, sa fokusom na modularnost, skalabilnost i bezbednost. Arhitektura je prilagođena potrebama pozorišta: online pristup gledaocima, interno upravljanje za zaposlene i integracija sa eksternim servisima (plaćanja, email).
+
+\subsection{Predložena Arhitektura Sistema}
+
+Koristi se\textbf{višeslojna arhitektura} (Layered Architecture) sa elementima \textbf{MVC (Model-View-Controller)} za organizaciju. Sistem je podeljen na slojeve radi lakšeg održavanja i proširivanja. Predlažemo implementaciju kao web-aplikaciju sa mobilnom podrškom za gledaoce, koristeći moderne tehnologije (npr. React za frontend, Node.js/Express za backend, PostgreSQL za bazu).
+
+\subsubsection{Sloj Korisničkog Interfejsa (Presentation Layer)}
+\textbf{Opis:} Interfejsi za interakciju sa korisnicima (gledaoci, zaposleni).
+
+\textbf{Komponente:}
+\begin{itemize}
+    \item \textbf{Web aplikacija za gledaoce:} Online prodaja karata (izbor predstave, sedišta, plaćanje). Koristi responsive dizajn za desktop i mobilne uređaje.
+    \item \textbf{Admin panel:} Za zaposlene (admin, finansijski službenik, reditelj) – unos zaposlenih, upravljanje finansijama, kreiranje predstava.
+    \item \textbf{Blagajnički terminal:} Za uživo prodaju karata, integrisan sa skenerom kartica i štampačem računa/karata.
+    \item \textbf{Mobilna aplikacija:} Opcionalno, za gledaoce (pregled repertoara, brza kupovina).
+\end{itemize}
+
+\textbf{Tehnologije:} React.js/Vue.js za web, Flutter/React Native za mobilno. API pozivi ka backend-u.
+
+\textbf{Bezbednost:} HTTPS, autentifikacija (OAuth/JWT), uloge (gledalac, zaposleni).
+
+\subsubsection{Sloj Poslovne Logike (Application/Business Layer)}
+\textbf{Opis:} Obrada zahteva, validacija i poslovna pravila.
+
+\textbf{Komponente/Moduli:}
+\begin{itemize}
+    \item \textbf{Modul za prodaju karata:} Obrada kupovine (uživo/online), ažuriranje dostupnosti sedišta, integracija sa plaćanjima (Stripe/PayPal za online, lokalni POS za uživo).
+    \item \textbf{Modul za upravljanje finansijama:} Pregled transakcija, korekcija plata, generisanje izveštaja (PDF/Excel).
+    \item \textbf{Modul za upravljanje predstavama:} Kreiranje predstava (planiranje, budžet), ažuriranje informacija, audicije.
+    \item \textbf{Modul za ljudske resurse:} Unos zaposlenih, upravljanje podacima (plate, dokumenti).
+    \item \textbf{Modul za operacije:} Naručivanje opreme, evidentiranje tehničkih potreba, popravke pozorišta, zakazivanje termina.
+    \item \textbf{Email servis:} Automatsko slanje potvrda (za kupovinu karata, obaveštenja).
+\end{itemize}
+
+\textbf{Tehnologije:} Node.js/Express ili Python/Django za backend. Mikroservisna arhitektura za modularnost (npr. poseban servis za plaćanja).
+
+\textbf{Integracije:} API za plaćanja, email servisi (SendGrid), kalendar servisi za termine.
+
+\subsubsection{Sloj Podataka (Data Layer)}
+\textbf{Opis:} Čuvanje i pristup podacima.
+
+\textbf{Komponente:}
+\begin{itemize}
+    \item \textbf{Baza podataka:} Relacijska baza (PostgreSQL/MySQL) sa tabelama za: korisnike/zaposlene, predstave/termini/sedišta, transakcije/finansije, opremu/popravke.
+    \begin{itemize}
+        \item Ključni entiteti (na osnovu dijagrama klasa): Predstava, Zaposleni, Transakcija, Karta, Oprema, itd.
+    \end{itemize}
+    \item \textbf{ORM:} Za mapiranje objekata (npr. Sequelize za Node.js).
+    \item \textbf{Keširanje:} Redis za brže učitavanje dostupnih sedišta.
+\end{itemize}
+
+\textbf{Bezbednost:} Enkripcija podataka, backup-ovi, pristup na osnovu uloga.
+
