@@ -4,7 +4,7 @@ Arhitekturu sistema je zasnovana na tipičnom višeslojnom pristupu za informaci
 
 \subsection{Predložena Arhitektura Sistema}
 
-Koristi se\textbf{višeslojna arhitektura} (Layered Architecture) sa elementima \textbf{MVC (Model-View-Controller)} za organizaciju. Sistem je podeljen na slojeve radi lakšeg održavanja i proširivanja. Predlažemo implementaciju kao web-aplikaciju sa mobilnom podrškom za gledaoce, koristeći moderne tehnologije (npr. React za frontend, Node.js/Express za backend, PostgreSQL za bazu).
+Koristi se \textbf{višeslojna arhitektura} (3-tier arhitektura) za organizaciju. Sistem je podeljen na slojeve radi lakšeg održavanja i proširivanja. Predlažemo implementaciju kao web-aplikaciju sa mobilnom podrškom za gledaoce, koristeći moderne tehnologije (npr. React za frontend, Node.js/Express za backend, PostgreSQL za bazu).
 
 \subsubsection{Sloj Korisničkog Interfejsa (Presentation Layer)}
 \textbf{Opis:} Interfejsi za interakciju sa korisnicima (gledaoci, zaposleni).
@@ -43,7 +43,7 @@ Koristi se\textbf{višeslojna arhitektura} (Layered Architecture) sa elementima 
 
 \textbf{Komponente:}
 \begin{itemize}
-    \item \textbf{Baza podataka:} Relacijska baza (PostgreSQL/MySQL) sa tabelama za: korisnike/zaposlene, predstave/termini/sedišta, transakcije/finansije, opremu/popravke.
+    \item \textbf{Baza podataka:} Relaciona baza (PostgreSQL) sa tabelama za: korisnike/zaposlene, predstave/termini/sedišta, transakcije/finansije, opremu/popravke.
     \begin{itemize}
         \item Ključni entiteti (na osnovu dijagrama klasa): Predstava, Zaposleni, Transakcija, Karta, Oprema, itd.
     \end{itemize}
@@ -53,3 +53,14 @@ Koristi se\textbf{višeslojna arhitektura} (Layered Architecture) sa elementima 
 
 \textbf{Bezbednost:} Enkripcija podataka, backup-ovi, pristup na osnovu uloga.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{./Dijagrami/Arhitektura/Arhitektura.png} 
+	\caption{Predlog arhitekture sistema}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{./Dijagrami/Arhitektura/3-tier arhitektura.png} 
+	\caption{Predlog 3-tier arhitekture sistema}
+\end{figure}
