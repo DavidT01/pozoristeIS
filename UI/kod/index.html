@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pozorište - Online Kupovina</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Pozorište MATF</h1>
+    <nav class="main-nav">
+        <a href="#" onclick="window.location.reload(); return false;" class="active">Repertoar</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Pozorište <span class="arrow">▼</span></a>
+            <div class="dropdown-content">
+                <a href="#">O pozorištu</a>
+                <a href="#">Ansambl</a>
+                <a href="#">Sponzori</a>
+            </div>
+        </div>
+        <a href="#">Kontakt</a>
+    </nav>
+</header>
+
+<div class="container">
+    
+    <!-- Repertoar -->
+    <div id="screen-repertoire" class="screen active">
+        <h2>Repertoar</h2>
+        <div class="play-list">
+            <div class="play-card">
+                <img src="hamlet.jpg" alt="Hamlet" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
+                <div class="play-info" style="flex: 1;">
+                    <h3>Hamlet</h3>
+                    <p>Vilijam Šekspir</p>
+                    <p style="font-size: 0.9em; color: #666;"><em>Režija: Jagoš Marković</em></p>
+                </div>
+                <button class="btn" onclick="selectPlay('Hamlet')">Kupi kartu</button>
+            </div>
+            <div class="play-card">
+                <img src="romeojulija.jpg" alt="Romeo i Julija" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
+                <div class="play-info" style="flex: 1;">
+                    <h3>Romeo i Julija</h3>
+                    <p>Vilijam Šekspir</p>
+                    <p style="font-size: 0.9em; color: #666;"><em>Režija: Kokan Mladenović</em></p>
+                </div>
+                <button class="btn" onclick="selectPlay('Romeo i Julija')">Kupi kartu</button>
+            </div>
+            <div class="play-card">
+                <img src="ministarka.jpg" alt="Gospođa Ministarka" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
+                <div class="play-info" style="flex: 1;">
+                    <h3>Gospođa Ministarka</h3>
+                    <p>Branislav Nušić</p>
+                    <p style="font-size: 0.9em; color: #666;"><em>Režija: Egon Savin</em></p>
+                </div>
+                <button class="btn" onclick="selectPlay('Gospođa Ministarka')">Kupi kartu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Termini -->
+    <div id="screen-dates" class="screen">
+        <h2 id="selected-play-title"></h2>
+        
+        <div id="play-cast" style="margin-bottom: 20px; padding: 15px; background-color: #f9f9f9; border-left: 4px solid #800000; border-radius: 4px;">
+            <h3 style="margin-top: 0; color: #333;">Uloge</h3>
+            <ul id="cast-list" style="list-style-type: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                
+            </ul>
+        </div>
+
+        <h3>Odaberite termin</h3>
+        <div class="date-list">
+            <div class="date-card" onclick="selectDate('15.01.2026', '20:00')">
+                <div class="date">15. Jan 2026</div>
+                <div class="time">20:00</div>
+            </div>
+            <div class="date-card" onclick="selectDate('16.01.2026', '18:00')">
+                <div class="date">16. Jan 2026</div>
+                <div class="time">18:00</div>
+            </div>
+            <div class="date-card" onclick="selectDate('20.01.2026', '20:00')">
+                <div class="date">20. Jan 2026</div>
+                <div class="time">20:00</div>
+            </div>
+        </div>
+        <div style="margin-top: 20px;">
+            <button class="btn btn-secondary" onclick="showScreen('screen-repertoire')">Nazad</button>
+        </div>
+    </div>
+
+    <!-- Sedišta -->
+    <div id="screen-seats" class="screen">
+        <h2>Odaberite sedišta</h2>
+        <div class="stage">BINA</div>
+        
+        <div class="seat-legend">
+            <div class="legend-item"><div class="legend-box" style="background:#ccc"></div> Slobodno</div>
+            <div class="legend-item"><div class="legend-box" style="background:#e74c3c"></div> Zauzeto</div>
+            <div class="legend-item"><div class="legend-box" style="background:#27ae60"></div> Vaš izbor</div>
+        </div>
+
+        <div class="seating-chart" id="seating-chart">
+            
+        </div>
+
+        <div class="price-display">
+            Ukupno: <span id="total-price">0</span> RSD
+        </div>
+
+        <div style="margin-top: 20px; text-align: right;">
+            <button class="btn btn-secondary" onclick="showScreen('screen-dates')">Nazad</button>
+            <button class="btn" id="btn-to-checkout" onclick="goToCheckout()" disabled>Dalje</button>
+        </div>
+    </div>
+
+    <!-- Plaćanje -->
+    <div id="screen-checkout" class="screen">
+        <h2>Plaćanje</h2>
+        
+        <div class="summary-box">
+            <h3>Pregled rezervacije</h3>
+            <p><strong>Predstava:</strong> <span id="summary-play"></span></p>
+            <p><strong>Termin:</strong> <span id="summary-date"></span></p>
+            <p><strong>Sedišta:</strong> <span id="summary-seats"></span></p>
+            <p><strong>Ukupno za plaćanje:</strong> <span id="summary-price"></span> RSD</p>
+        </div>
+
+        <form onsubmit="processPayment(event)">
+            <div class="form-row">
+                <div class="form-group" style="flex:1">
+                    <label>Ime</label>
+                    <input type="text" required placeholder="Petar" oninvalid="this.setCustomValidity('Polje je obavezno')" oninput="this.setCustomValidity('')">
+                </div>
+                <div class="form-group" style="flex:1">
+                    <label>Prezime</label>
+                    <input type="text" required placeholder="Petrović" oninvalid="this.setCustomValidity('Polje je obavezno')" oninput="this.setCustomValidity('')">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Email adresa</label>
+                <input type="email" required placeholder="petar@email.com" oninvalid="this.setCustomValidity('Unesite validnu email adresu')" oninput="this.setCustomValidity('')">
+            </div>
+
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+            
+            <div class="form-group">
+                <label>Broj kartice</label>
+                <input type="text" required placeholder="1234 5678 1234 5678" maxlength="19" oninvalid="this.setCustomValidity('Polje je obavezno')" oninput="this.setCustomValidity('')">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group" style="flex:1">
+                    <label>Datum isteka</label>
+                    <input type="text" required placeholder="MM/YY" maxlength="5" oninvalid="this.setCustomValidity('Polje je obavezno')" oninput="this.setCustomValidity('')"> 
+                </div>
+                <div class="form-group" style="flex:1">
+                    <label>CVV</label>
+                    <input type="text" required placeholder="123" maxlength="3" oninvalid="this.setCustomValidity('Polje je obavezno')" oninput="this.setCustomValidity('')">
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                <button type="button" class="btn btn-secondary" onclick="showScreen('screen-seats')">Nazad</button>
+                <button type="submit" class="btn">Potvrdi i Plati</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Uspeh -->
+    <div id="screen-success" class="screen">
+        <div class="success-message">
+            <div class="success-icon">✓</div>
+            <h2>Uspešna kupovina!</h2>
+            <p>Vaše karte su rezervisane i plaćene.</p>
+            <p>Potvrda je poslata na vašu email adresu.</p>
+            <button class="btn" onclick="location.reload()" style="margin-top: 20px;">Povratak na početnu stranicu</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
