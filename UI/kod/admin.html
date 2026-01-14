@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Pozorište MATF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+      
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5; /* Svetlo siva pozadina za admina */
+            color: #333;
+        }
+
+        /* --- HEADER  --- */
+        header {
+            background-color: #1e272e; /* Tamno siva/crna boja */
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #800000; /* Tanka crvena linija (brend) */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Dugme za odjavu (skriveno dok se ne uloguješ) */
+        #logout-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            display: none; 
+        }
+        #logout-btn:hover {
+            background-color: #800000;
+            border-color: #800000;
+        }
+
+        /* --- SEKCIJA ZA LOGOVANJE (Centrirano) --- */
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh; 
+        }
+
+        .login-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            border-top: 5px solid #1e272e;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-top: 0;
+            color: #1e272e;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+        }
+
+        .btn-submit {
+            background-color: #1e272e; /* Tamna boja */
+            color: white;
+            padding: 12px;
+            border: none;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #800000;
+        }
+
+        .error-message {
+            color: #d63031;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        
+        #dashboard-container {
+            display: none; 
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 1rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 5px solid #1e272e; /* Tamna crta levo */
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #1e272e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+     
+        .btn-action {
+            background-color: #f0f2f5;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        .btn-action:hover {
+            background-color: #e2e6ea;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Pozorište MATF <span style="font-weight:300; opacity:0.7;">| Administracija</span></h1>
+        <button id="logout-btn" onclick="logout()">Odjavi se</button>
+    </header>
+
+    <div id="login-section" class="login-wrapper">
+        <div class="login-box">
+            <h2>Prijava zaposlenih</h2>
+            <p style="color:#777; font-size:0.9rem; margin-bottom:20px;">Pristup sistemu za administraciju</p>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Korisničko ime</label>
+                    <input type="text" id="username" class="form-control" placeholder="Unesite korisničko ime">
+                </div>
+                <div class="form-group">
+                    <label for="password">Lozinka</label>
+                    <input type="password" id="password" class="form-control" placeholder="Unesite lozinku">
+                </div>
+                <button type="submit" class="btn-submit">Prijavi se</button>
+                <p id="login-error" class="error-message">Pogrešni podaci. Pokušajte ponovo.</p>
+            </form>
+        </div>
+    </div>
+
+    <div id="dashboard-container">
+        <div class="dashboard-header">
+            <h2 id="welcome-text">Dobrodošli</h2>
+            <p>Pregled stanja i administrativne akcije.</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="card" id="card-hr">
+                <h3><i class="fas fa-users"></i> Zaposleni</h3>
+                <p>Evidencija radnog vremena i unos novih članova.</p>
+                <button class="btn-action">Dodaj novog zaposlenog</button>
+                <button class="btn-action">Raspored smena</button>
+            </div>
+
+            <div class="card" id="card-finance">
+                <h3><i class="fas fa-coins"></i> Finansije</h3>
+                <p>Pregled prodaje karata i odobravanje budžeta.</p>
+                <button class="btn-action">Izveštaj prodaje</button>
+                <button class="btn-action">Troškovi produkcije</button>
+            </div>
+
+            <div class="card" id="card-tech">
+                <h3><i class="fas fa-tools"></i> Tehnika & Oprema</h3>
+                <p>Prijave kvarova na sceni i nabavka opreme.</p>
+                <button class="btn-action">Prijavi kvar</button>
+                <button class="btn-action">Inventar opreme</button>
+            </div>
+            
+            <div class="card" id="card-repertoire">
+    <h3><i class="fas fa-calendar-alt"></i> Repertoar</h3>
+    <p>Pregled i upravljanje rasporedom predstava.</p>
+    
+    <button class="btn-action" id="btn-add-play" style="display: none;">Nova predstava</button>
+    
+    <button class="btn-action">Pregled rasporeda</button>
+</div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
