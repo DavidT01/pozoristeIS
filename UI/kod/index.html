@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pozorište - Online Kupovina</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -28,34 +29,62 @@
     
     <!-- Repertoar -->
     <div id="screen-repertoire" class="screen active">
-        <h2>Repertoar</h2>
-        <div class="play-list">
-            <div class="play-card">
-                <img src="hamlet.jpg" alt="Hamlet" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
-                <div class="play-info" style="flex: 1;">
-                    <h3>Hamlet</h3>
-                    <p>Vilijam Šekspir</p>
-                    <p style="font-size: 0.9em; color: #666;"><em>Režija: Jagoš Marković</em></p>
+        <div class="repertoire-container">
+            <div class="repertoire-left">
+                <h2>Repertoar</h2>
+                <div class="play-list">
+                    <div class="play-card">
+                        <img src="hamlet.jpg" alt="Hamlet" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
+                        <div class="play-info" style="flex: 1;">
+                            <h3>Hamlet</h3>
+                            <p>Vilijam Šekspir</p>
+                            <p style="font-size: 0.9em; color: #666;"><em>Režija: Jagoš Marković</em></p>
+                        </div>
+                        <button class="btn" onclick="selectPlay('Hamlet')">Kupi kartu</button>
+                    </div>
+                    <div class="play-card">
+                        <img src="romeojulija.jpg" alt="Romeo i Julija" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
+                        <div class="play-info" style="flex: 1;">
+                            <h3>Romeo i Julija</h3>
+                            <p>Vilijam Šekspir</p>
+                            <p style="font-size: 0.9em; color: #666;"><em>Režija: Kokan Mladenović</em></p>
+                        </div>
+                        <button class="btn" onclick="selectPlay('Romeo i Julija')">Kupi kartu</button>
+                    </div>
+                    <div class="play-card">
+                        <img src="ministarka.jpg" alt="Gospođa Ministarka" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
+                        <div class="play-info" style="flex: 1;">
+                            <h3>Gospođa Ministarka</h3>
+                            <p>Branislav Nušić</p>
+                            <p style="font-size: 0.9em; color: #666;"><em>Režija: Egon Savin</em></p>
+                        </div>
+                        <button class="btn" onclick="selectPlay('Gospođa Ministarka')">Kupi kartu</button>
+                    </div>
                 </div>
-                <button class="btn" onclick="selectPlay('Hamlet')">Kupi kartu</button>
             </div>
-            <div class="play-card">
-                <img src="romeojulija.jpg" alt="Romeo i Julija" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
-                <div class="play-info" style="flex: 1;">
-                    <h3>Romeo i Julija</h3>
-                    <p>Vilijam Šekspir</p>
-                    <p style="font-size: 0.9em; color: #666;"><em>Režija: Kokan Mladenović</em></p>
+            
+            <div class="repertoire-right">
+                <h2>Obaveštenja</h2>
+                <div class="notification-list">
+                    <div class="notification-card">
+                        <h3>Premijera predstave 'Balkanski špijun'</h3>
+                        <p class="date">02.02.2026</p>
+                        <p>Ne propustite premijeru kultne predstave...</p>
+                        <a href="#">Pročitaj više</a>
+                    </div>
+                    <div class="notification-card">
+                        <h3>Gostovanje u Novom Sadu</h3>
+                        <p class="date">25.01.2026</p>
+                        <p>Naš ansambl gostuje u SNP-u sa predstavom Hamlet...</p>
+                        <a href="#">Pročitaj više</a>
+                    </div>
+                    <div class="notification-card">
+                        <h3>Popust za studente</h3>
+                        <p class="date">03.01.2026</p>
+                        <p>Uz indeks ostvarujete 50% popusta na sve karte nedeljom...</p>
+                        <a href="#">Pročitaj više</a>
+                    </div>
                 </div>
-                <button class="btn" onclick="selectPlay('Romeo i Julija')">Kupi kartu</button>
-            </div>
-            <div class="play-card">
-                <img src="ministarka.jpg" alt="Gospođa Ministarka" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
-                <div class="play-info" style="flex: 1;">
-                    <h3>Gospođa Ministarka</h3>
-                    <p>Branislav Nušić</p>
-                    <p style="font-size: 0.9em; color: #666;"><em>Režija: Egon Savin</em></p>
-                </div>
-                <button class="btn" onclick="selectPlay('Gospođa Ministarka')">Kupi kartu</button>
             </div>
         </div>
     </div>
@@ -182,6 +211,44 @@
     </div>
 
 </div>
+
+<footer id="main-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Kontakt</h4>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                Studentski trg 16, 11000 Beograd
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                +381 11 123 456
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                kontakt@pozoriste-matf.rs
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Pratite nas</h4>
+            <div class="social-item">
+                <i class="fab fa-instagram"></i>
+                Instagram
+            </div>
+            <div class="social-item">
+                <i class="fab fa-facebook"></i>
+                Facebook
+            </div>
+            <div class="social-item">
+                <i class="fab fa-twitter"></i>
+                Twitter
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Pozorište MATF
+    </div>
+</footer>
 
 <script src="script.js"></script>
 </body>
