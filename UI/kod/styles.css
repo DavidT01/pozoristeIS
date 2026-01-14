@@ -269,16 +269,16 @@ h2 {
     margin-bottom: 1rem;
 }
 
-.repertoire-container {
+.layout-wrapper {
     display: flex;
     gap: 30px;
 }
 
-.repertoire-left {
+.layout-main {
     flex: 2;
 }
 
-.repertoire-right {
+.layout-sidebar {
     flex: 1;
     border-left: 1px solid #eee;
     padding-left: 20px;
@@ -323,11 +323,11 @@ h2 {
 }
 
 @media (max-width: 768px) {
-    .repertoire-container {
+    .layout-wrapper {
         flex-direction: column;
     }
     
-    .repertoire-right {
+    .layout-sidebar {
         border-left: none;
         border-top: 1px solid #eee;
         padding-left: 0;
