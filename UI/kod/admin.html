@@ -7,178 +7,51 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-      
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f2f5; /* Svetlo siva pozadina za admina */
-            color: #333;
-        }
-
-        /* --- HEADER  --- */
-        header {
-            background-color: #1e272e; /* Tamno siva/crna boja */
-            color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid #800000; /* Tanka crvena linija (brend) */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
-
-        /* Dugme za odjavu (skriveno dok se ne uloguješ) */
-        #logout-btn {
-            background: none;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            padding: 5px 15px;
-            cursor: pointer;
-            border-radius: 4px;
-            display: none; 
-        }
-        #logout-btn:hover {
-            background-color: #800000;
-            border-color: #800000;
-        }
-
-        /* --- SEKCIJA ZA LOGOVANJE (Centrirano) --- */
-        .login-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh; 
-        }
-
-        .login-box {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-            border-top: 5px solid #1e272e;
-            text-align: center;
-        }
-
-        .login-box h2 {
-            margin-top: 0;
-            color: #1e272e;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            background-color: #f9f9f9;
-        }
-
-        .btn-submit {
-            background-color: #1e272e; /* Tamna boja */
-            color: white;
-            padding: 12px;
-            border: none;
-            width: 100%;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .btn-submit:hover {
-            background-color: #800000;
-        }
-
-        .error-message {
-            color: #d63031;
-            font-size: 0.9rem;
-            margin-top: 10px;
-            display: none;
-        }
-
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; color: #333; }
         
-        #dashboard-container {
-            display: none; 
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        /* HEADER */
+        header { background-color: #1e272e; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #800000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        header h1 { margin: 0; font-size: 1.2rem; font-weight: 500; }
+        #logout-btn { background: none; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 5px 15px; cursor: pointer; border-radius: 4px; display: none; }
+        #logout-btn:hover { background-color: #800000; border-color: #800000; }
 
-        .dashboard-header {
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 1rem;
-        }
+        /* LOGIN */
+        .login-wrapper { display: flex; justify-content: center; align-items: center; height: 80vh; }
+        .login-box { background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; border-top: 5px solid #1e272e; text-align: center; }
+        .form-group { margin-bottom: 1.5rem; text-align: left; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; background-color: #f9f9f9; }
+        .btn-submit { background-color: #1e272e; color: white; padding: 12px; border: none; width: 100%; border-radius: 4px; font-size: 1rem; cursor: pointer; transition: background 0.3s; }
+        .btn-submit:hover { background-color: #800000; }
+        .error-message { color: #d63031; font-size: 0.9rem; margin-top: 10px; display: none; }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-left: 5px solid #1e272e; /* Tamna crta levo */
-            transition: transform 0.2s;
-        }
+        /* DASHBOARD */
+        #dashboard-container { display: none; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+        .dashboard-header { margin-bottom: 2rem; border-bottom: 1px solid #ccc; padding-bottom: 1rem; display: flex; justify-content: space-between; align-items: end; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
         
-        .card:hover {
-            transform: translateY(-3px);
-        }
+        .card { background: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 5px solid #1e272e; display: flex; flex-direction: column; }
+        .card h3 { margin-top: 0; color: #1e272e; display: flex; align-items: center; gap: 10px; }
+        
+        /* DATA LISTS (Novi deo za prikaz podataka) */
+        .data-list { margin-top: 15px; max-height: 200px; overflow-y: auto; background: #fafafa; border: 1px solid #eee; padding: 10px; font-size: 0.9rem; }
+        .data-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #eee; align-items: center; }
+        .data-item:last-child { border-bottom: none; }
+        .status-open { color: red; font-weight: bold; cursor: pointer; }
+        .status-fixed { color: green; font-weight: bold; cursor: pointer; }
 
-        .card h3 {
-            margin-top: 0;
-            color: #1e272e;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .btn-action { background-color: #f0f2f5; color: #333; border: 1px solid #ccc; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-top: 10px; margin-right: 5px; font-size: 0.9rem; }
+        .btn-action:hover { background-color: #e2e6ea; }
+        .btn-primary { background-color: #1e272e; color: white; border: none; }
+        .btn-primary:hover { background-color: #333; }
+        .btn-delete { color: #d63031; cursor: pointer; margin-left: 10px; }
 
-        .card p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-     
-        .btn-action {
-            background-color: #f0f2f5;
-            color: #333;
-            border: 1px solid #ccc;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-        .btn-action:hover {
-            background-color: #e2e6ea;
-        }
-
+        /* MODAL POPUP (Za unos podataka) */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 2rem; border-radius: 8px; width: 400px; position: relative; }
+        .modal-close { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.2rem; }
+        .modal-content input, .modal-content select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; box-sizing: border-box; }
+        
+        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } }
     </style>
 </head>
 <body>
@@ -191,59 +64,79 @@
     <div id="login-section" class="login-wrapper">
         <div class="login-box">
             <h2>Prijava zaposlenih</h2>
-            <p style="color:#777; font-size:0.9rem; margin-bottom:20px;">Pristup sistemu za administraciju</p>
-            
+            <p style="color:#777; font-size:0.9rem; margin-bottom:20px;">Podrazumevani pristup: admin / admin123</p>
             <form id="login-form">
                 <div class="form-group">
                     <label for="username">Korisničko ime</label>
-                    <input type="text" id="username" class="form-control" placeholder="Unesite korisničko ime">
+                    <input type="text" id="username" class="form-control" placeholder="admin, hr, tech, dir">
                 </div>
                 <div class="form-group">
                     <label for="password">Lozinka</label>
-                    <input type="password" id="password" class="form-control" placeholder="Unesite lozinku">
+                    <input type="password" id="password" class="form-control" placeholder="Lozinka...">
                 </div>
                 <button type="submit" class="btn-submit">Prijavi se</button>
-                <p id="login-error" class="error-message">Pogrešni podaci. Pokušajte ponovo.</p>
+                <p id="login-error" class="error-message">Pogrešni podaci.</p>
             </form>
         </div>
     </div>
 
     <div id="dashboard-container">
         <div class="dashboard-header">
-            <h2 id="welcome-text">Dobrodošli</h2>
-            <p>Pregled stanja i administrativne akcije.</p>
+            <div>
+                <h2 id="welcome-text">Dobrodošli</h2>
+                <p id="role-display" style="color: #666; margin:0;">Uloga: </p>
+            </div>
+            <button onclick="clearSystemData()" style="font-size:0.8rem; color:red; border:none; background:none; cursor:pointer;">(Resetuj sve podatke)</button>
         </div>
 
         <div class="grid-container">
+            
             <div class="card" id="card-hr">
                 <h3><i class="fas fa-users"></i> Zaposleni</h3>
-                <p>Evidencija radnog vremena i unos novih članova.</p>
-                <button class="btn-action">Dodaj novog zaposlenog</button>
-                <button class="btn-action">Raspored smena</button>
+                <div id="hr-stats" style="font-size: 2rem; font-weight:bold; margin: 10px 0;">0</div>
+                <p>Aktivni članovi tima.</p>
+                <div id="hr-list" class="data-list">Nema unetih zaposlenih.</div>
+                <div>
+                    <button class="btn-action btn-primary" onclick="openModal('addEmployee')">Dodaj zaposlenog</button>
+                </div>
             </div>
 
             <div class="card" id="card-finance">
                 <h3><i class="fas fa-coins"></i> Finansije</h3>
-                <p>Pregled prodaje karata i odobravanje budžeta.</p>
-                <button class="btn-action">Izveštaj prodaje</button>
-                <button class="btn-action">Troškovi produkcije</button>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span>Ukupan prihod:</span>
+                    <span id="fin-total" style="font-weight:bold; color:green;">0 RSD</span>
+                </div>
+                <p style="margin-top:10px; font-size:0.9rem;">Bazirano na prodatim kartama.</p>
             </div>
 
             <div class="card" id="card-tech">
-                <h3><i class="fas fa-tools"></i> Tehnika & Oprema</h3>
-                <p>Prijave kvarova na sceni i nabavka opreme.</p>
-                <button class="btn-action">Prijavi kvar</button>
-                <button class="btn-action">Inventar opreme</button>
+                <h3><i class="fas fa-tools"></i> Tehnička podrška</h3>
+                <p>Klikni na status za promenu (Otvoreno/Rešeno).</p>
+                <div id="tech-list" class="data-list">Nema prijavljenih kvarova.</div>
+                <div>
+                    <button class="btn-action btn-primary" onclick="openModal('addTechIssue')">Prijavi kvar</button>
+                </div>
             </div>
             
             <div class="card" id="card-repertoire">
-    <h3><i class="fas fa-calendar-alt"></i> Repertoar</h3>
-    <p>Pregled i upravljanje rasporedom predstava.</p>
-    
-    <button class="btn-action" id="btn-add-play" style="display: none;">Nova predstava</button>
-    
-    <button class="btn-action">Pregled rasporeda</button>
-</div>
+                <h3><i class="fas fa-calendar-alt"></i> Repertoar</h3>
+                <p>Nadolazeće predstave.</p>
+                <div id="rep-list" class="data-list">Nema zakazanih predstava.</div>
+                <div id="rep-actions">
+                    <button class="btn-action btn-primary" onclick="openModal('addPlay')">Nova predstava</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Naslov</h3>
+            <div id="modal-body">
+                </div>
+        </div>
     </div>
 
     <script src="admin.js"></script>
