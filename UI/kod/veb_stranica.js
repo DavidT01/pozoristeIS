@@ -3,8 +3,15 @@ let state = {
     date: null,
     time: null,
     seats: [],
-    pricePerSeat: 1000,
     totalPrice: 0
+};
+
+const SEAT_CONFIG = {
+    rows: 5,
+    colsPerGroup: 4, // 4 left, 4 right
+    vipRows: 2,
+    vipPrice: 1500,
+    regularPrice: 1000
 };
 
 const playsData = {
@@ -45,8 +52,15 @@ function selectPlay(playName) {
 function selectDate(date, time) {
     state.date = date;
     state.time = time;
+    document.getElementById('seats-screen-title').textContent = `${state.play} - ${date} ${time}`;
     renderSeats();
     showScreen('screen-seats');
+}
+
+function getSeatPrice(seatNum) {
+    const seatsPerRow = SEAT_CONFIG.colsPerGroup * 2;
+    const row = Math.ceil(seatNum / seatsPerRow);
+    return row <= SEAT_CONFIG.vipRows ? SEAT_CONFIG.vipPrice : SEAT_CONFIG.regularPrice;
 }
 
 function renderSeats() {
@@ -55,20 +69,47 @@ function renderSeats() {
     state.seats = [];
     updatePrice();
 
-    for (let i = 1; i <= 40; i++) {
+    const leftGroup = document.createElement('div');
+    leftGroup.className = 'seat-group';
+    
+    const rightGroup = document.createElement('div');
+    rightGroup.className = 'seat-group';
+
+    const totalSeats = SEAT_CONFIG.rows * SEAT_CONFIG.colsPerGroup * 2; // 40
+
+    for (let i = 1; i <= totalSeats; i++) {
+        const price = getSeatPrice(i);
+        const isVip = price === SEAT_CONFIG.vipPrice;
+
         const seat = document.createElement('div');
-        seat.className = 'seat';
+        seat.className = `seat ${isVip ? 'vip' : ''}`;
+        seat.dataset.number = i;
+        seat.dataset.price = price;
         
         if (Math.random() < 0.3) {
             seat.classList.add('occupied');
-            seat.title = `Sedište ${i} (Zauzeto)`;
+            seat.title = `Sedište ${i} (${isVip ? 'VIP' : 'Regular'}) - Zauzeto`;
         } else {
-            seat.title = `Sedište ${i}`;
+            seat.title = `Sedište ${i} (${isVip ? 'VIP' : 'Regular'}, ${price} RSD)`;
             seat.onclick = () => toggleSeat(seat, i);
         }
         
-        container.appendChild(seat);
+        // Determine whether to add to left or right group
+        // Row 1: 1-4 Left, 5-8 Right
+        // Row 2: 9-12 Left, 13-16 Right
+        // Formula: (i-1) % 8 < 4 ? Left : Right
+        const seatsPerRow = SEAT_CONFIG.colsPerGroup * 2;
+        const posInRow = (i - 1) % seatsPerRow;
+        
+        if (posInRow < SEAT_CONFIG.colsPerGroup) {
+            leftGroup.appendChild(seat);
+        } else {
+            rightGroup.appendChild(seat);
+        }
     }
+
+    container.appendChild(leftGroup);
+    container.appendChild(rightGroup);
 }
 
 function toggleSeat(seatEl, seatNum) {
@@ -87,7 +128,7 @@ function toggleSeat(seatEl, seatNum) {
 }
 
 function updatePrice() {
-    state.totalPrice = state.seats.length * state.pricePerSeat;
+    state.totalPrice = state.seats.reduce((sum, seatNum) => sum + getSeatPrice(seatNum), 0);
     document.getElementById('total-price').textContent = state.totalPrice;
     
     const btn = document.getElementById('btn-to-checkout');

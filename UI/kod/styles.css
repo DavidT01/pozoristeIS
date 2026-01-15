@@ -9,8 +9,21 @@ body {
 header {
     background-color: #800000;
     color: white;
-    padding: 1rem 2rem;
-    text-align: center;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-logo img {
+    height: 60px;
+    border-radius: 4px;
 }
 
 header h1 {
@@ -18,7 +31,7 @@ header h1 {
 }
 
 .main-nav {
-    margin-top: 1rem;
+    margin: 0;
 }
 
 .main-nav a {
@@ -83,6 +96,46 @@ header h1 {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.search-box {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin-left: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    vertical-align: middle;
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 0.95rem;
+    width: 150px;
+    font-family: inherit;
+}
+
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-box button {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+    font-size: 0.9rem;
+    transition: transform 0.2s;
+}
+
+.search-box button:hover {
+    transform: scale(1.1);
 }
 
 .container {
@@ -174,31 +227,51 @@ h2 {
 }
 
 .seating-chart {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    gap: 10px;
-    margin-bottom: 20px;
+    display: flex;
     justify-content: center;
-    max-width: 400px;
-    margin: 0 auto;
+    gap: 50px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+}
+
+.seat-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
 }
 
 .seat {
-    width: 30px;
-    height: 30px;
-    background-color: #ccc;
-    border-radius: 4px;
+    width: 35px;
+    height: 35px;
+    background-color: #bdc3c7;
+    border-radius: 6px 6px 2px 2px;
     cursor: pointer;
     margin: 0 auto;
+    position: relative;
+    border-bottom: 3px solid #95a5a6;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.seat:hover:not(.occupied) {
+    transform: scale(1.1);
+}
+
+.seat.vip {
+    background-color: #f1c40f;
+    border-bottom-color: #f39c12;
 }
 
 .seat.occupied {
     background-color: #e74c3c;
+    border-bottom-color: #c0392b;
     cursor: not-allowed;
 }
 
 .seat.selected {
     background-color: #27ae60;
+    border-bottom-color: #219150;
+    color: white;
 }
 
 .seat-legend {
