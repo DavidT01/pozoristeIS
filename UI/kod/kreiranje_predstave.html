@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kreiranje Predstave - Pozorište MATF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #1e272e;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #800000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #800000;
+            border-color: #800000;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #1e272e;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f2f5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-section h3 {
+            color: #1e272e;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1e272e;
+        }
+
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #800000;
+            background-color: white;
+            box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-row-three {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group small {
+            display: block;
+            color: #777;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        .actor-list {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .actor-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .actor-item input {
+            flex: 1;
+            margin-right: 0.5rem;
+            padding: 8px;
+        }
+
+        .actor-item button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .actor-item button:hover {
+            background: #c0392b;
+        }
+
+        .btn-add-actor {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .btn-add-actor:hover {
+            background: #229954;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #1e272e;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #800000;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: none;
+        }
+
+        .budget-summary {
+            background: #f0f2f5;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #800000;
+        }
+
+        .budget-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .budget-row strong {
+            color: #1e272e;
+        }
+
+        .budget-total {
+            padding-top: 0.5rem;
+            border-top: 1px solid #ddd;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #800000;
+        }
+
+        @media (max-width: 768px) {
+            .form-row,
+            .form-row-three {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Pozorište MATF <span style="font-weight:300; opacity:0.7;">| Kreiranje Predstave</span></h1>
+        <button class="logout-btn" onclick="goBack()">← Nazad</button>
+    </header>
+
+    <div class="container">
+        <h2>
+            <i class="fas fa-theater-masks"></i>
+            Kreiranje nove predstave
+        </h2>
+
+        <div id="alert-success" class="alert alert-success">
+            <i class="fas fa-check-circle"></i> Predstava je uspešno kreirana!
+        </div>
+
+        <div id="alert-error" class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i> <span id="error-message">Greška pri kreiranju predstave.</span>
+        </div>
+
+        <form id="play-form">
+
+            <!-- OSNOVNI PODACI O PREDSTAVI -->
+            <div class="form-section">
+                <h3><i class="fas fa-info-circle"></i> Osnovni podaci o predstavi</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="play-title" class="required">Naziv predstave</label>
+                        <input type="text" id="play-title" name="title" placeholder="npr. Hamlet" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="play-author" class="required">Autor</label>
+                        <input type="text" id="play-author" name="author" placeholder="npr. Vilijam Šekspir" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="play-director" class="required">Reditelj</label>
+                        <input type="text" id="play-director" name="director" placeholder="npr. Jagoš Marković" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="play-genre" class="required">Žanr</label>
+                        <select id="play-genre" name="genre" required>
+                            <option value="">-- Odaberite žanr --</option>
+                            <option value="tragedija">Tragedija</option>
+                            <option value="komedija">Komedija</option>
+                            <option value="drama">Drama</option>
+                            <option value="musical">Mjuzikl</option>
+                            <option value="fantastika">Fantastika</option>
+                            <option value="istorijsko">Istorijsko</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="play-duration" class="required">Trajanje (minuta)</label>
+                        <input type="number" id="play-duration" name="duration" placeholder="npr. 120" min="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="play-premiere-date" class="required">Datum premijere</label>
+                        <input type="date" id="play-premiere-date" name="premiere_date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="play-description">Opis predstave</label>
+                    <textarea id="play-description" name="description" placeholder="Unesite detaljan opis predstave..."></textarea>
+                </div>
+            </div>
+
+            <!-- ULOGE I GLUMCI -->
+            <div class="form-section">
+                <h3><i class="fas fa-masks-theater"></i> Uloge i glumci</h3>
+
+                <div class="form-group">
+                    <button type="button" class="btn-add-actor" onclick="addActorField()">
+                        <i class="fas fa-plus"></i> Dodaj glumca
+                    </button>
+
+                    <div class="actor-list" id="actor-list">
+                        <div class="actor-item">
+                            <input type="text" placeholder="Naziv uloge" class="role-input">
+                            <input type="text" placeholder="Ime glumca" class="actor-input">
+                            <button type="button" onclick="removeActorField(this)">Ukloni</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TEHNIČKI ZAHTEVI -->
+            <div class="form-section">
+                <h3><i class="fas fa-tools"></i> Tehnički zahtevi</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="scenography">Scenografija</label>
+                        <textarea id="scenography" name="scenography" placeholder="Opis scenografije i rekvizita..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="lighting">Svetlosni efekti</label>
+                        <textarea id="lighting" name="lighting" placeholder="Opis svetlosnih efekata..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sound">Zvučne potrebe</label>
+                    <textarea id="sound" name="sound" placeholder="Opis zvučnih potreba i muzike..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="equipment-cost" class="required">Troškovi opreme (RSD)</label>
+                        <input type="number" id="equipment-cost" name="equipment_cost" placeholder="0" min="0" required oninput="updateBudgetSummary()">
+                    </div>
+                    <div class="form-group">
+                        <label for="setup-time" class="required">Vreme za pripremu (minuta)</label>
+                        <input type="number" id="setup-time" name="setup_time" placeholder="np. 60" min="15" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FINANSIJSKI PODACI -->
+            <div class="form-section">
+                <h3><i class="fas fa-coins"></i> Finansijski podaci</h3>
+
+                <div class="budget-summary">
+                    <div class="budget-row">
+                        <strong>Troškovi opreme:</strong>
+                        <span id="budget-equipment">0 RSD</span>
+                    </div>
+                    <div class="budget-row">
+                        <strong>Troškovi angažovanja glumaca:</strong>
+                        <span id="budget-actors">0 RSD</span>
+                    </div>
+                    <div class="budget-row">
+                        <strong>Ostali troškovi:</strong>
+                        <span id="budget-other">0 RSD</span>
+                    </div>
+                    <div class="budget-total">
+                        Ukupan budžet: <span id="budget-total">0 RSD</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="actors-cost" class="required">Troškovi angažovanja glumaca (RSD)</label>
+                        <input type="number" id="actors-cost" name="actors_cost" placeholder="0" min="0" required oninput="updateBudgetSummary()">
+                    </div>
+                    <div class="form-group">
+                        <label for="other-cost" class="required">Ostali troškovi (RSD)</label>
+                        <input type="number" id="other-cost" name="other_cost" placeholder="0" min="0" required oninput="updateBudgetSummary()">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="budget-limit" class="required">Raspoloživi budžet (RSD)</label>
+                    <input type="number" id="budget-limit" name="budget_limit" placeholder="0" min="0" required>
+                    <small>Reditelj treba da proveri da li se troškovi uklapaju u raspoloživi budžet</small>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sponsorships">Sponzorstva (RSD)</label>
+                        <input type="number" id="sponsorships" name="sponsorships" placeholder="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="grants">Dotacije (RSD)</label>
+                        <input type="number" id="grants" name="grants" placeholder="0" min="0">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="budget-notes">Napomene o budžetu</label>
+                    <textarea id="budget-notes" name="budget_notes" placeholder="Dodatne napomene ili posebne zahteve..."></textarea>
+                </div>
+            </div>
+
+            <!-- RASPORED PROBE -->
+            <div class="form-section">
+                <h3><i class="fas fa-calendar"></i> Raspored proba</h3>
+
+                <div class="form-group">
+                    <label for="rehearsal-start" class="required">Početak proba</label>
+                    <input type="date" id="rehearsal-start" name="rehearsal_start" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rehearsal-end" class="required">Završetak proba</label>
+                    <input type="date" id="rehearsal-end" name="rehearsal_end" required>
+                    <small>Praktično, ovo bi trebalo da bude nekoliko dana pre premijere</small>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="rehearsal-frequency" class="required">Učestalost proba</label>
+                        <select id="rehearsal-frequency" name="rehearsal_frequency" required>
+                            <option value="">-- Odaberite --</option>
+                            <option value="daily">Svakodnevno</option>
+                            <option value="3-times">3 puta nedeljno</option>
+                            <option value="2-times">2 puta nedeljno</option>
+                            <option value="weekly">Jednom nedeljno</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rehearsal-location" class="required">Lokacija proba</label>
+                        <select id="rehearsal-location" name="rehearsal_location" required>
+                            <option value="">-- Odaberite --</option>
+                            <option value="main-stage">Glavna scena</option>
+                            <option value="small-stage">Mala scena</option>
+                            <option value="rehearsal-room">Sala za probe</option>
+                            <option value="external">Spoljašnja lokacija</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DUGMADI -->
+            <div class="btn-container">
+                <button type="reset" class="btn btn-secondary">Očisti formu</button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Kreiraj predstavu
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Dodaj glumca
+        function addActorField() {
+            const actorList = document.getElementById('actor-list');
+            const newActorItem = document.createElement('div');
+            newActorItem.className = 'actor-item';
+            newActorItem.innerHTML = `
+                <input type="text" placeholder="Naziv uloge" class="role-input">
+                <input type="text" placeholder="Ime glumca" class="actor-input">
+                <button type="button" onclick="removeActorField(this)">Ukloni</button>
+            `;
+            actorList.appendChild(newActorItem);
+        }
+
+        // Ukloni glumca
+        function removeActorField(button) {
+            button.parentElement.remove();
+        }
+
+        // Ažuriranje budžeta
+        function updateBudgetSummary() {
+            const equipmentCost = parseFloat(document.getElementById('equipment-cost').value) || 0;
+            const actorsCost = parseFloat(document.getElementById('actors-cost').value) || 0;
+            const otherCost = parseFloat(document.getElementById('other-cost').value) || 0;
+            const total = equipmentCost + actorsCost + otherCost;
+
+            document.getElementById('budget-equipment').textContent = equipmentCost.toLocaleString('sr-RS') + ' RSD';
+            document.getElementById('budget-actors').textContent = actorsCost.toLocaleString('sr-RS') + ' RSD';
+            document.getElementById('budget-other').textContent = otherCost.toLocaleString('sr-RS') + ' RSD';
+            document.getElementById('budget-total').textContent = total.toLocaleString('sr-RS') + ' RSD';
+
+            // Provera budžeta
+            const budgetLimit = parseFloat(document.getElementById('budget-limit').value) || 0;
+            const budgetElement = document.getElementById('budget-total');
+            if (total > budgetLimit && budgetLimit > 0) {
+                budgetElement.style.color = '#e74c3c';
+            } else {
+                budgetElement.style.color = '#800000';
+            }
+        }
+
+        // Prikazi nazad dugme
+        function goBack() {
+            window.history.back();
+        }
+
+        // Prikazi/Sakrij upozorenja
+        function showAlert(type, message) {
+            const alertId = type === 'success' ? 'alert-success' : 'alert-error';
+            const alert = document.getElementById(alertId);
+            if (message) {
+                document.getElementById('error-message').textContent = message;
+            }
+            alert.style.display = 'block';
+            if (type === 'success') {
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                    document.getElementById('play-form').reset();
+                }, 3000);
+            }
+        }
+
+        // Provera budžeta
+        function validateBudget() {
+            const equipmentCost = parseFloat(document.getElementById('equipment-cost').value) || 0;
+            const actorsCost = parseFloat(document.getElementById('actors-cost').value) || 0;
+            const otherCost = parseFloat(document.getElementById('other-cost').value) || 0;
+            const total = equipmentCost + actorsCost + otherCost;
+            const budgetLimit = parseFloat(document.getElementById('budget-limit').value) || 0;
+
+            if (total > budgetLimit && budgetLimit > 0) {
+                showAlert('error', 'Troškovi predstave prelaze raspoloživi budžet!');
+                return false;
+            }
+            return true;
+        }
+
+        // Slanje forme
+        document.getElementById('play-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!validateBudget()) {
+                return;
+            }
+
+            // Prikupljanje podataka
+            const formData = {
+                title: document.getElementById('play-title').value,
+                author: document.getElementById('play-author').value,
+                director: document.getElementById('play-director').value,
+                genre: document.getElementById('play-genre').value,
+                duration: parseInt(document.getElementById('play-duration').value),
+                premiere_date: document.getElementById('play-premiere-date').value,
+                description: document.getElementById('play-description').value,
+                actors: [],
+                scenography: document.getElementById('scenography').value,
+                lighting: document.getElementById('lighting').value,
+                sound: document.getElementById('sound').value,
+                equipment_cost: parseFloat(document.getElementById('equipment-cost').value) || 0,
+                setup_time: parseInt(document.getElementById('setup-time').value),
+                actors_cost: parseFloat(document.getElementById('actors-cost').value) || 0,
+                other_cost: parseFloat(document.getElementById('other-cost').value) || 0,
+                budget_limit: parseFloat(document.getElementById('budget-limit').value) || 0,
+                sponsorships: parseFloat(document.getElementById('sponsorships').value) || 0,
+                grants: parseFloat(document.getElementById('grants').value) || 0,
+                budget_notes: document.getElementById('budget-notes').value,
+                rehearsal_start: document.getElementById('rehearsal-start').value,
+                rehearsal_end: document.getElementById('rehearsal-end').value,
+                rehearsal_frequency: document.getElementById('rehearsal-frequency').value,
+                rehearsal_location: document.getElementById('rehearsal-location').value
+            };
+
+            // Prikupljanje glumaca
+            const actorItems = document.querySelectorAll('.actor-item');
+            actorItems.forEach(item => {
+                const role = item.querySelector('.role-input').value;
+                const actor = item.querySelector('.actor-input').value;
+                if (role && actor) {
+                    formData.actors.push({ role, actor });
+                }
+            });
+
+            // Simulacija slanja na server
+            console.log('Podaci predstave:', formData);
+            showAlert('success', 'Predstava je uspešno kreirana!');
+        });
+
+        // Inicijalizuj budžet
+        updateBudgetSummary();
+    </script>
+
+</body>
+</html>

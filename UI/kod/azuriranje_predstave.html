@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ažuriranje Predstave - Pozorište MATF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #1e272e;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #800000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #800000;
+            border-color: #800000;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .plays-list-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-height: 700px;
+            overflow-y: auto;
+        }
+
+        .plays-list-container h3 {
+            color: #1e272e;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f2f5;
+        }
+
+        .search-box {
+            margin-bottom: 1rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .play-item {
+            padding: 1rem;
+            border-left: 4px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f9f9f9;
+        }
+
+        .play-item:hover {
+            border-left-color: #800000;
+            background: #f0f2f5;
+            transform: translateX(5px);
+        }
+
+        .play-item.active {
+            border-left-color: #800000;
+            background: white;
+            box-shadow: 0 2px 8px rgba(128, 0, 0, 0.15);
+        }
+
+        .play-item h4 {
+            margin: 0 0 0.3rem 0;
+            color: #1e272e;
+            font-size: 0.95rem;
+        }
+
+        .play-item p {
+            margin: 0;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-container h2 {
+            color: #1e272e;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f2f5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .no-play-selected {
+            text-align: center;
+            color: #999;
+            padding: 3rem 2rem;
+        }
+
+        .no-play-selected i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-section h3 {
+            color: #1e272e;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1e272e;
+        }
+
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #800000;
+            background-color: white;
+            box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .actor-list {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .actor-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .actor-item input {
+            flex: 1;
+            margin-right: 0.5rem;
+            padding: 8px;
+        }
+
+        .actor-item button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .actor-item button:hover {
+            background: #c0392b;
+        }
+
+        .btn-add-actor {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .btn-add-actor:hover {
+            background: #229954;
+        }
+
+        .change-indicator {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #1e272e;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #800000;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .confirmation-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 400px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h3 {
+            color: #1e272e;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .plays-list-container {
+                max-height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                margin: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Pozorište MATF <span style="font-weight:300; opacity:0.7;">| Ažuriranje Predstave</span></h1>
+        <button class="logout-btn" onclick="goBack()">← Nazad</button>
+    </header>
+
+    <div class="main-container">
+        <!-- LISTA PREDSTAVA -->
+        <div class="plays-list-container">
+            <h3><i class="fas fa-list"></i> Predstave</h3>
+            <div class="search-box">
+                <input type="text" id="search-play" placeholder="Pretraži predstave..." onkeyup="filterPlays()">
+            </div>
+            <div id="plays-list">
+                <!-- Dinamički učitana lista -->
+            </div>
+        </div>
+
+        <!-- FORMA ZA AŽURIRANJE -->
+        <div class="form-container">
+            <div id="no-play-message" class="no-play-selected">
+                <i class="fas fa-theater-masks"></i>
+                <p>Odaberite predstavu sa leve strane da biste je ažurirali.</p>
+            </div>
+
+            <form id="update-form" style="display: none;">
+                <h2>
+                    <i class="fas fa-edit"></i>
+                    Ažuriranje predstave
+                </h2>
+
+                <div id="alert-success" class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> Predstava je uspešno ažurirana!
+                </div>
+
+                <div id="alert-error" class="alert alert-error">
+                    <i class="fas fa-exclamation-circle"></i> <span id="error-message">Greška pri ažuriranju predstave.</span>
+                </div>
+
+                <div id="alert-warning" class="alert alert-warning">
+                    <i class="fas fa-info-circle"></i> Primeti da će tvoje izmene biti dostavljene administratoru na odobrenje.
+                </div>
+
+                <!-- OSNOVNI PODACI -->
+                <div class="form-section">
+                    <h3><i class="fas fa-info-circle"></i> Osnovni podaci o predstavi</h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="play-title">Naziv predstave</label>
+                            <input type="text" id="play-title" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="play-author">Autor</label>
+                            <input type="text" id="play-author" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="play-director" class="required">Reditelj</label>
+                            <input type="text" id="play-director">
+                        </div>
+                        <div class="form-group">
+                            <label for="play-genre">Žanr</label>
+                            <select id="play-genre">
+                                <option value="">-- Odaberite žanr --</option>
+                                <option value="tragedija">Tragedija</option>
+                                <option value="komedija">Komedija</option>
+                                <option value="drama">Drama</option>
+                                <option value="musical">Mjuzikl</option>
+                                <option value="fantastika">Fantastika</option>
+                                <option value="istorijsko">Istorijsko</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="play-duration" class="required">Trajanje (minuta)</label>
+                            <input type="number" id="play-duration" min="30">
+                        </div>
+                        <div class="form-group">
+                            <label for="play-premiere-date">Datum premijere</label>
+                            <input type="date" id="play-premiere-date" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="play-description">Opis predstave</label>
+                        <textarea id="play-description" placeholder="Unesite detaljan opis predstave..."></textarea>
+                    </div>
+                </div>
+
+                <!-- ULOGE I GLUMCI -->
+                <div class="form-section">
+                    <h3><i class="fas fa-masks-theater"></i> Uloge i glumci</h3>
+
+                    <div class="form-group">
+                        <button type="button" class="btn-add-actor" onclick="addActorField()">
+                            <i class="fas fa-plus"></i> Dodaj glumca
+                        </button>
+
+                        <div class="actor-list" id="actor-list">
+                            <!-- Dinamički učitani glumci -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEHNIČKI ZAHTEVI -->
+                <div class="form-section">
+                    <h3><i class="fas fa-tools"></i> Tehnički zahtevi</h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="scenography">Scenografija</label>
+                            <textarea id="scenography" placeholder="Opis scenografije i rekvizita..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="lighting">Svetlosni efekti</label>
+                            <textarea id="lighting" placeholder="Opis svetlosnih efekata..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sound">Zvučne potrebe</label>
+                        <textarea id="sound" placeholder="Opis zvučnih potreba i muzike..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="equipment-cost">Troškovi opreme (RSD)</label>
+                            <input type="number" id="equipment-cost" min="0" oninput="updateBudgetSummary()">
+                        </div>
+                        <div class="form-group">
+                            <label for="setup-time">Vreme za pripremu (minuta)</label>
+                            <input type="number" id="setup-time" min="15">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NAPOMENE ZA ADMINISTRATORA -->
+                <div class="form-section">
+                    <h3><i class="fas fa-comments"></i> Napomene za administratora</h3>
+
+                    <div class="form-group">
+                        <label for="admin-notes">Šta se menja?</label>
+                        <textarea id="admin-notes" placeholder="Navedite sve izmene koje ste napravili..." required></textarea>
+                        <small>Ove napomene će biti dostavljene administratoru zajedno sa vašim izmenama.</small>
+                    </div>
+                </div>
+
+                <!-- DUGMADI -->
+                <div class="btn-container">
+                    <button type="button" class="btn btn-secondary" onclick="clearForm()">Otkaži</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Pošalji na odobrenje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- POTVRDA MODALA -->
+    <div id="confirmation-modal" class="confirmation-modal">
+        <div class="modal-content">
+            <h3>Potvrda izmena</h3>
+            <p>Da li ste sigurni da želite da pošaljete ove izmene administratoru na odobrenje?</p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="closeConfirmationModal()">Otkaži</button>
+                <button class="btn btn-primary" onclick="confirmUpdate()">Potvrdi</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SIMULIRANI PODACI O PREDSTAVAMA
+        const plays = [
+            {
+                id: 1,
+                title: 'Hamlet',
+                author: 'Vilijam Šekspir',
+                director: 'Jagoš Marković',
+                genre: 'tragedija',
+                duration: 150,
+                premiere_date: '2026-01-30',
+                description: 'Klasična tragedija o danskom princu Hamletu...',
+                actors: [
+                    { role: 'Hamlet', actor: 'Petar Petrović' },
+                    { role: 'Gertruda', actor: 'Jelena Jović' },
+                    { role: 'Klaudije', actor: 'Marko Marković' }
+                ],
+                scenography: 'Zamak Elsinor',
+                lighting: 'Dramatični svetlosni efekti',
+                sound: 'Ambijentalna muzika',
+                equipment_cost: 50000,
+                setup_time: 90
+            },
+            {
+                id: 2,
+                title: 'Romeo i Julija',
+                author: 'Vilijam Šekspir',
+                director: 'Kokan Mladenović',
+                genre: 'tragedija',
+                duration: 120,
+                premiere_date: '2026-02-14',
+                description: 'Vremenska ljubavna tragedija dva mladih iz rivalizantnih porodica...',
+                actors: [
+                    { role: 'Romeo', actor: 'Milan Ilić' },
+                    { role: 'Julija', actor: 'Ana Ćirilović' }
+                ],
+                scenography: 'Verona, Italija',
+                lighting: 'Romantični svetlosni efekti',
+                sound: 'Klasična muzika',
+                equipment_cost: 45000,
+                setup_time: 75
+            },
+            {
+                id: 3,
+                title: 'Gospođa Ministarka',
+                author: 'Branislav Nušić',
+                director: 'Egon Savin',
+                genre: 'komedija',
+                duration: 100,
+                premiere_date: '2026-03-15',
+                description: 'Satirična komedija srpskog društva...',
+                actors: [
+                    { role: 'Gospođa', actor: 'Sonja Savić' }
+                ],
+                scenography: 'Beograd, 19. vek',
+                lighting: 'Topli svetlosni efekti',
+                sound: 'Laka muzika',
+                equipment_cost: 35000,
+                setup_time: 60
+            }
+        ];
+
+        let currentPlayId = null;
+
+        // Učitaj listu predstava
+        function loadPlaysList() {
+            const list = document.getElementById('plays-list');
+            list.innerHTML = '';
+
+            plays.forEach(play => {
+                const playItem = document.createElement('div');
+                playItem.className = 'play-item';
+                playItem.onclick = () => selectPlay(play.id);
+                playItem.innerHTML = `
+                    <h4>${play.title}</h4>
+                    <p><strong>${play.author}</strong></p>
+                    <p>Režija: ${play.director}</p>
+                `;
+                list.appendChild(playItem);
+            });
+        }
+
+        // Odaberi predstavu
+        function selectPlay(playId) {
+            currentPlayId = playId;
+            const play = plays.find(p => p.id === playId);
+
+            if (!play) return;
+
+            // Aktiviraj stavku u listi
+            document.querySelectorAll('.play-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.play-item').classList.add('active');
+
+            // Prikaži formu
+            document.getElementById('no-play-message').style.display = 'none';
+            document.getElementById('update-form').style.display = 'block';
+
+            // Učitaj podatke
+            document.getElementById('play-title').value = play.title;
+            document.getElementById('play-author').value = play.author;
+            document.getElementById('play-director').value = play.director;
+            document.getElementById('play-genre').value = play.genre;
+            document.getElementById('play-duration').value = play.duration;
+            document.getElementById('play-premiere-date').value = play.premiere_date;
+            document.getElementById('play-description').value = play.description;
+            document.getElementById('scenography').value = play.scenography;
+            document.getElementById('lighting').value = play.lighting;
+            document.getElementById('sound').value = play.sound;
+            document.getElementById('equipment-cost').value = play.equipment_cost;
+            document.getElementById('setup-time').value = play.setup_time;
+
+            // Učitaj glumce
+            const actorList = document.getElementById('actor-list');
+            actorList.innerHTML = '';
+            play.actors.forEach(a => {
+                const actorItem = document.createElement('div');
+                actorItem.className = 'actor-item';
+                actorItem.innerHTML = `
+                    <input type="text" placeholder="Naziv uloge" class="role-input" value="${a.role}">
+                    <input type="text" placeholder="Ime glumca" class="actor-input" value="${a.actor}">
+                    <button type="button" onclick="removeActorField(this)">Ukloni</button>
+                `;
+                actorList.appendChild(actorItem);
+            });
+
+            // Prikaži upozorenje
+            document.getElementById('alert-warning').style.display = 'flex';
+            document.getElementById('alert-warning').style.alignItems = 'center';
+        }
+
+        // Pretraži predstave
+        function filterPlays() {
+            const searchTerm = document.getElementById('search-play').value.toLowerCase();
+            document.querySelectorAll('.play-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        }
+
+        // Dodaj glumca
+        function addActorField() {
+            const actorList = document.getElementById('actor-list');
+            const newActorItem = document.createElement('div');
+            newActorItem.className = 'actor-item';
+            newActorItem.innerHTML = `
+                <input type="text" placeholder="Naziv uloge" class="role-input">
+                <input type="text" placeholder="Ime glumca" class="actor-input">
+                <button type="button" onclick="removeActorField(this)">Ukloni</button>
+            `;
+            actorList.appendChild(newActorItem);
+        }
+
+        // Ukloni glumca
+        function removeActorField(button) {
+            button.parentElement.remove();
+        }
+
+        // Ažuriranje budžeta
+        function updateBudgetSummary() {
+            // Placeholder za budžet
+        }
+
+        // Očisti formu
+        function clearForm() {
+            document.getElementById('update-form').reset();
+            document.getElementById('no-play-message').style.display = 'block';
+            document.getElementById('update-form').style.display = 'none';
+            document.querySelectorAll('.play-item').forEach(item => item.classList.remove('active'));
+            currentPlayId = null;
+        }
+
+        // Prikaži potvrdu
+        function openConfirmationModal() {
+            document.getElementById('confirmation-modal').classList.add('active');
+        }
+
+        // Zatvori potvrdu
+        function closeConfirmationModal() {
+            document.getElementById('confirmation-modal').classList.remove('active');
+        }
+
+        // Potvrdi ažuriranje
+        function confirmUpdate() {
+            closeConfirmationModal();
+
+            const formData = {
+                play_id: currentPlayId,
+                director: document.getElementById('play-director').value,
+                genre: document.getElementById('play-genre').value,
+                duration: parseInt(document.getElementById('play-duration').value),
+                description: document.getElementById('play-description').value,
+                scenography: document.getElementById('scenography').value,
+                lighting: document.getElementById('lighting').value,
+                sound: document.getElementById('sound').value,
+                equipment_cost: parseFloat(document.getElementById('equipment-cost').value) || 0,
+                setup_time: parseInt(document.getElementById('setup-time').value),
+                admin_notes: document.getElementById('admin-notes').value,
+                actors: []
+            };
+
+            // Prikupljanje glumaca
+            const actorItems = document.querySelectorAll('.actor-item');
+            actorItems.forEach(item => {
+                const role = item.querySelector('.role-input').value;
+                const actor = item.querySelector('.actor-input').value;
+                if (role && actor) {
+                    formData.actors.push({ role, actor });
+                }
+            });
+
+            console.log('Ažurirani podaci:', formData);
+            document.getElementById('alert-success').style.display = 'flex';
+            document.getElementById('alert-success').style.alignItems = 'center';
+
+            setTimeout(() => {
+                document.getElementById('alert-success').style.display = 'none';
+                clearForm();
+            }, 3000);
+        }
+
+        // Slanje forme
+        document.getElementById('update-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!currentPlayId) {
+                document.getElementById('alert-error').style.display = 'flex';
+                return;
+            }
+
+            if (!document.getElementById('admin-notes').value) {
+                document.getElementById('error-message').textContent = 'Molimo navedite izmene koje ste napravili.';
+                document.getElementById('alert-error').style.display = 'flex';
+                return;
+            }
+
+            openConfirmationModal();
+        });
+
+        // Nazad
+        function goBack() {
+            window.history.back();
+        }
+
+        // Inicijalizacija
+        loadPlaysList();
+    </script>
+
+</body>
+</html>
