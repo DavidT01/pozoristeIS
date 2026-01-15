@@ -10,7 +10,10 @@
 <body>
 
 <header>
-    <h1>Pozorište MATF</h1>
+    <div class="header-logo">
+        <img src="logo.png" alt="Logo">
+        <h1>Pozorište MATF</h1>
+    </div>
     <nav class="main-nav">
         <a href="#" onclick="window.location.reload(); return false;" class="active">Repertoar</a>
         <div class="dropdown">
@@ -21,7 +24,14 @@
                 <a href="#">Sponzori</a>
             </div>
         </div>
+        <a href="#">Galerija</a>
+        <a href="#">Arhiva</a>
         <a href="#">Kontakt</a>
+        
+        <div class="search-box">
+            <input type="text" placeholder="Pretraga...">
+            <button type="button"><i class="fas fa-search"></i></button>
+        </div>
     </nav>
 </header>
 
@@ -95,11 +105,13 @@
 
     <!-- Sedišta -->
     <div id="screen-seats" class="screen">
-        <h2>Odaberite sedišta</h2>
-        <div class="stage">BINA</div>
+        <h2 id="seats-screen-title"></h2>
+        <h3 style="text-align: center; margin-bottom: 20px;">Odaberite sedišta</h3>
+        <div class="stage">SCENA</div>
         
         <div class="seat-legend">
-            <div class="legend-item"><div class="legend-box" style="background:#ccc"></div> Slobodno</div>
+            <div class="legend-item"><div class="legend-box" style="background:#bdc3c7; border-bottom: 3px solid #95a5a6;"></div> Parter (1000 RSD)</div>
+            <div class="legend-item"><div class="legend-box" style="background:#f1c40f; border-bottom: 3px solid #f39c12;"></div> VIP (1500 RSD)</div>
             <div class="legend-item"><div class="legend-box" style="background:#e74c3c"></div> Zauzeto</div>
             <div class="legend-item"><div class="legend-box" style="background:#27ae60"></div> Vaš izbor</div>
         </div>
@@ -167,7 +179,7 @@
 
             <div style="margin-top: 20px; display: flex; justify-content: space-between;">
                 <button type="button" class="btn btn-secondary" onclick="showScreen('screen-seats')">Nazad</button>
-                <button type="submit" class="btn">Potvrdi i Plati</button>
+                <button type="submit" class="btn">Plati</button>
             </div>
         </form>
     </div>
@@ -186,7 +198,7 @@
         </div>
         
         <div class="layout-sidebar">
-            <h2>Obaveštenja</h2>
+            <h2>Novosti</h2>
             <div class="notification-list">
                 <div class="notification-card">
                     <h3>Premijera predstave 'Balkanski špijun'</h3>
