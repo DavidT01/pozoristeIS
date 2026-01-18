@@ -3,139 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Pozorište MATF</title>
+    <title>IS Pozorište - Panel v13</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; color: #333; }
         
         /* HEADER */
-        header { background-color: #1e272e; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #800000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        header h1 { margin: 0; font-size: 1.2rem; font-weight: 500; }
-        #logout-btn { background: none; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 5px 15px; cursor: pointer; border-radius: 4px; display: none; }
-        #logout-btn:hover { background-color: #800000; border-color: #800000; }
+        header { background-color: #2c3e50; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #c0392b; }
+        header h1 { margin: 0; font-size: 1.2rem; }
+        #logout-btn { background: #c0392b; border: none; color: white; padding: 6px 12px; cursor: pointer; border-radius: 4px; display: none; }
 
         /* LOGIN */
-        .login-wrapper { display: flex; justify-content: center; align-items: center; height: 80vh; }
-        .login-box { background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; border-top: 5px solid #1e272e; text-align: center; }
-        .form-group { margin-bottom: 1.5rem; text-align: left; }
-        .form-control { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; background-color: #f9f9f9; }
-        .btn-submit { background-color: #1e272e; color: white; padding: 12px; border: none; width: 100%; border-radius: 4px; font-size: 1rem; cursor: pointer; transition: background 0.3s; }
-        .btn-submit:hover { background-color: #800000; }
-        .error-message { color: #d63031; font-size: 0.9rem; margin-top: 10px; display: none; }
+        #login-screen { display: flex; justify-content: center; align-items: center; height: 90vh; }
+        .login-box { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 300px; text-align: center; }
+        .login-box input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .login-box button { width: 100%; padding: 10px; background-color: #2c3e50; color: white; border: none; cursor: pointer; }
 
         /* DASHBOARD */
-        #dashboard-container { display: none; padding: 2rem; max-width: 1200px; margin: 0 auto; }
-        .dashboard-header { margin-bottom: 2rem; border-bottom: 1px solid #ccc; padding-bottom: 1rem; display: flex; justify-content: space-between; align-items: end; }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        #dashboard { display: none; padding: 2rem; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
         
-        .card { background: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 5px solid #1e272e; display: flex; flex-direction: column; }
-        .card h3 { margin-top: 0; color: #1e272e; display: flex; align-items: center; gap: 10px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 5px solid #2c3e50; }
+        .card h3 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         
-        /* DATA LISTS (Novi deo za prikaz podataka) */
-        .data-list { margin-top: 15px; max-height: 200px; overflow-y: auto; background: #fafafa; border: 1px solid #eee; padding: 10px; font-size: 0.9rem; }
-        .data-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #eee; align-items: center; }
-        .data-item:last-child { border-bottom: none; }
-        .status-open { color: red; font-weight: bold; cursor: pointer; }
-        .status-fixed { color: green; font-weight: bold; cursor: pointer; }
+        .btn-action { background-color: #34495e; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+        .btn-primary { background-color: #c0392b; }
+        
+        .btn-approve { background-color: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 5px; }
+        .btn-reject { background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; }
 
-        .btn-action { background-color: #f0f2f5; color: #333; border: 1px solid #ccc; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-top: 10px; margin-right: 5px; font-size: 0.9rem; }
-        .btn-action:hover { background-color: #e2e6ea; }
-        .btn-primary { background-color: #1e272e; color: white; border: none; }
-        .btn-primary:hover { background-color: #333; }
-        .btn-delete { color: #d63031; cursor: pointer; margin-left: 10px; }
+        /* AUDICIJE STIL */
+        .audition-item { background: #f8f9fa; border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 5px; border-left: 4px solid #3498db; }
+        .candidates-box { margin-top: 10px; font-size: 0.85rem; background: #fff; padding: 5px; border: 1px dashed #ccc; }
+        .applied-badge { color: #27ae60; font-weight: bold; font-size: 0.9rem; }
 
-        /* MODAL POPUP (Za unos podataka) */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: white; padding: 2rem; border-radius: 8px; width: 400px; position: relative; }
-        .modal-close { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.2rem; }
-        .modal-content input, .modal-content select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; box-sizing: border-box; }
+        /* ODOBRAVANJE */
+        .approval-box { background-color: #fff3cd; border: 2px solid #ffecb5; padding: 15px; margin-top: 15px; border-radius: 5px; }
+        .approval-item { display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px; margin-bottom: 5px; border: 1px solid #eee; }
+
+        /* MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 25px; border-radius: 8px; width: 400px; position: relative; max-height: 80vh; overflow-y: auto; }
+        .modal-close { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.5rem; color: #888; }
         
-        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn-submit { width: 100%; padding: 10px; background: #c0392b; color: white; border: none; cursor: pointer; }
+        
+        .email-preview { font-family: monospace; color: #2980b9; font-weight: bold; margin-top: 5px; display: block; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Pozorište MATF <span style="font-weight:300; opacity:0.7;">| Administracija</span></h1>
-        <button id="logout-btn" onclick="logout()">Odjavi se</button>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-theater-masks fa-2x"></i>
+            <h1>IS Pozorište</h1>
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span id="user-name" style="font-weight: 500;"></span>
+            <button id="logout-btn" onclick="logout()">Odjavi se</button>
+        </div>
     </header>
 
-    <div id="login-section" class="login-wrapper">
+    <div id="login-screen">
         <div class="login-box">
-            <h2>Prijava zaposlenih</h2>
-            <p style="color:#777; font-size:0.9rem; margin-bottom:20px;">Podrazumevani pristup: admin / admin123</p>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="username">Korisničko ime</label>
-                    <input type="text" id="username" class="form-control" placeholder="admin, hr, tech, dir">
-                </div>
-                <div class="form-group">
-                    <label for="password">Lozinka</label>
-                    <input type="password" id="password" class="form-control" placeholder="Lozinka...">
-                </div>
-                <button type="submit" class="btn-submit">Prijavi se</button>
-                <p id="login-error" class="error-message">Pogrešni podaci.</p>
-            </form>
+            <h2 style="color:#2c3e50;">Prijava</h2>
+            <input type="text" id="username" placeholder="Korisničko ime">
+            <input type="password" id="password" placeholder="Lozinka">
+            <button onclick="checkLogin()">Prijavi se</button>
+            <div id="login-error" style="color:red; display:none; margin-top:10px;">Pogrešni podaci!</div>
+            
+            <div style="margin-top:20px; font-size:0.8rem; color:#666; text-align:left; background:#eee; padding:10px;">
+                <strong>Nalozi:</strong><br>
+                Reditelj: <b>r / r</b><br>
+                Glumac: <b>g / g</b><br>
+                Admin: <b>a / a</b><br>
+                Tech: <b>t / t</b><br>
+                Fin: <b>f / f</b>
+            </div>
         </div>
     </div>
 
-    <div id="dashboard-container">
-        <div class="dashboard-header">
-            <div>
-                <h2 id="welcome-text">Dobrodošli</h2>
-                <p id="role-display" style="color: #666; margin:0;">Uloga: </p>
-            </div>
-            <button onclick="clearSystemData()" style="font-size:0.8rem; color:red; border:none; background:none; cursor:pointer;">(Resetuj sve podatke)</button>
-        </div>
-
+    <div id="dashboard">
         <div class="grid-container">
             
-            <div class="card" id="card-hr">
+            <div class="card" id="card-auditions" style="display:none; border-left-color: #3498db;">
+                <h3><i class="fas fa-microphone"></i> Audicije</h3>
+                <div id="audition-list" style="margin-bottom:15px;"></div>
+                <button id="btn-add-audition" class="btn-action btn-primary" onclick="openModal('addAudition')">
+                    <i class="fas fa-plus"></i> Raspiši audiciju
+                </button>
+            </div>
+
+            <div class="card" id="card-employees" style="display:none;">
                 <h3><i class="fas fa-users"></i> Zaposleni</h3>
-                <div id="hr-stats" style="font-size: 2rem; font-weight:bold; margin: 10px 0;">0</div>
-                <p>Aktivni članovi tima.</p>
-                <div id="hr-list" class="data-list">Nema unetih zaposlenih.</div>
-                <div>
-                    <button class="btn-action btn-primary" onclick="openModal('addEmployee')">Dodaj zaposlenog</button>
+                <div id="emp-list"></div>
+                <div id="emp-actions" style="margin-top:10px; display:none;">
+                    <button class="btn-action btn-primary" onclick="openModal('addEmployee')">Novi zaposleni</button>
                 </div>
             </div>
 
-            <div class="card" id="card-finance">
-                <h3><i class="fas fa-coins"></i> Finansije</h3>
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span>Ukupan prihod:</span>
-                    <span id="fin-total" style="font-weight:bold; color:green;">0 RSD</span>
+            <div class="card" id="card-finance" style="display:none; border-left-color: #27ae60;">
+                <h3 id="fin-title"><i class="fas fa-chart-line"></i> Finansije</h3>
+                
+                <div id="fin-stats"></div>
+                
+                <div id="fin-approval-container" style="display:none;" class="approval-box">
+                    <h4 style="margin-top:0; color:#856404;">⚠️ Finansije Tehničke Opreme</h4>
+                    <p style="font-size:0.9rem;">Zahtevi za odobrenje:</p>
+                    <div id="fin-approval-list"></div>
                 </div>
-                <p style="margin-top:10px; font-size:0.9rem;">Bazirano na prodatim kartama.</p>
             </div>
 
-            <div class="card" id="card-tech">
-                <h3><i class="fas fa-tools"></i> Tehnička podrška</h3>
-                <p>Klikni na status za promenu (Otvoreno/Rešeno).</p>
-                <div id="tech-list" class="data-list">Nema prijavljenih kvarova.</div>
-                <div>
-                    <button class="btn-action btn-primary" onclick="openModal('addTechIssue')">Prijavi kvar</button>
-                </div>
-            </div>
-            
-            <div class="card" id="card-repertoire">
+            <div class="card" id="card-repertoire" style="border-left-color: #8e44ad;">
                 <h3><i class="fas fa-calendar-alt"></i> Repertoar</h3>
-                <p>Nadolazeće predstave.</p>
-                <div id="rep-list" class="data-list">Nema zakazanih predstava.</div>
-                <div id="rep-actions">
-                    <button class="btn-action btn-primary" onclick="openModal('addPlay')">Nova predstava</button>
+                <div id="rep-list"></div>
+                <div id="rep-actions" style="margin-top:10px;">
+                    <button class="btn-action btn-primary" onclick="openModal('addPlay')">Zakaži termin</button>
                 </div>
             </div>
+
+            <div class="card" id="card-tech" style="border-left-color: #f39c12;">
+                <h3><i class="fas fa-tools"></i> Tehnička služba</h3>
+                <div id="tech-list"></div>
+                <div style="margin-top:10px;">
+                    <button class="btn-action btn-primary" onclick="openModal('addTechIssue')">Prijavi problem/Opremu</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <div id="modal-overlay" class="modal-overlay">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal()">&times;</span>
-            <h3 id="modal-title">Naslov</h3>
-            <div id="modal-body">
+            
+            <div id="modal-addAudition" style="display:none;">
+                <h3>Raspiši Audiciju</h3>
+                <div class="form-group"><label>Uloga:</label><input type="text" id="inp-aud-role"></div>
+                <div class="form-group"><label>Predstava:</label><input type="text" id="inp-aud-play"></div>
+                <div class="form-group"><label>Opis:</label><textarea id="inp-aud-desc" rows="3"></textarea></div>
+                <button class="btn-submit" onclick="submitAudition()">Objavi</button>
+            </div>
+
+            <div id="modal-addEmployee" style="display:none;">
+                <h3>Novi Zaposleni</h3>
+                <div class="form-group"><label>Ime:</label><input type="text" id="inp-emp-firstname" oninput="generateEmail()"></div>
+                <div class="form-group"><label>Prezime:</label><input type="text" id="inp-emp-lastname" oninput="generateEmail()"></div>
+                <div class="form-group"><label>JMBG:</label><input type="text" id="inp-emp-jmbg" placeholder="13 cifara"></div>
+                <div class="form-group"><label>Uloga:</label>
+                    <select id="inp-emp-role">
+                        <option value="Glumac">Glumac</option>
+                        <option value="Reditelj">Reditelj</option>
+                        <option value="Tehničar">Tehničar</option>
+                        <option value="Administracija">Administracija</option>
+                    </select>
                 </div>
+                <div class="form-group"><label>Plata:</label><input type="number" id="inp-emp-sal"></div>
+                <div class="form-group"><label>Email:</label><span id="auto-email-display" class="email-preview">...</span></div>
+                <button class="btn-submit" onclick="submitEmployee()">Sačuvaj</button>
+            </div>
+
+            <div id="modal-addTechIssue" style="display:none;">
+                <h3>Prijava kvara / Opreme</h3>
+                <div class="form-group"><label>Oprema:</label><input type="text" id="inp-tech-item" placeholder="npr. Nova Mikseta"></div>
+                <div class="form-group"><label>Trošak (RSD):</label><input type="number" id="inp-tech-cost" value="0"><small>Ako je >0 ide Finansijama</small></div>
+                <div class="form-group"><label>Prioritet:</label>
+                    <select id="inp-tech-prio"><option>Nizak</option><option selected>Srednji</option><option>Visok</option></select>
+                </div>
+                <button class="btn-submit" onclick="submitTech()">Evidentiraj</button>
+            </div>
+
+            <div id="modal-addPlay" style="display:none;">
+                <h3>Zakaži termin</h3>
+                <div class="form-group"><label>Naziv:</label><input type="text" id="inp-play-title"></div>
+                <div class="form-group"><label>Tip:</label>
+                    <select id="inp-play-type"><option value="Izvedba">Izvedba</option><option value="Proba">Proba</option></select>
+                </div>
+                <div class="form-group"><label>Datum:</label><input type="datetime-local" id="inp-play-date"></div>
+                <div class="form-group"><label>Budžet produkcije (RSD):</label><input type="number" id="inp-play-budget" placeholder="0"></div>
+                <div class="form-group"><label>Cena karte:</label><input type="number" id="inp-play-price"></div>
+                <button class="btn-submit" onclick="submitPlay()">Zakaži</button>
+            </div>
+
         </div>
     </div>
 
