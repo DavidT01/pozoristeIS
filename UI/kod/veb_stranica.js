@@ -146,5 +146,9 @@ function goToCheckout() {
 
 function processPayment(e) {
     e.preventDefault();
+    const emailInput = document.getElementById('input-email');
+    const email = emailInput ? emailInput.value : '';
+    const emailSpan = document.getElementById('success-email');
+    if (emailSpan) emailSpan.textContent = email;
     showScreen('screen-success');
 }

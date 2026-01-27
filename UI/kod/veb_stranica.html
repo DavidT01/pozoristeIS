@@ -156,7 +156,7 @@
             
             <div class="form-group">
                 <label>Email adresa</label>
-                <input type="email" required placeholder="petar@email.com" oninvalid="this.setCustomValidity('Unesite validnu email adresu')" oninput="this.setCustomValidity('')">
+                <input id="input-email" type="email" required placeholder="petar@email.com" oninvalid="this.setCustomValidity('Unesite validnu email adresu')" oninput="this.setCustomValidity('')">
             </div>
 
             <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
@@ -190,7 +190,7 @@
             <div class="success-icon">✓</div>
             <h2>Uspešna kupovina!</h2>
             <p>Vaše karte su rezervisane i plaćene.</p>
-            <p>Potvrda je poslata na vašu email adresu.</p>
+            <p>Potvrda je poslata na vašu email adresu: <strong id="success-email"></strong></p>
             <button class="btn" onclick="location.reload()" style="margin-top: 20px;">Povratak na početnu stranicu</button>
         </div>
     </div>
