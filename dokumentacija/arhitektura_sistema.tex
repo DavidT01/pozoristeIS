@@ -2,11 +2,9 @@
 
 Arhitektura sistema je zasnovana na tipičnom višeslojnom pristupu za informacione sisteme, sa fokusom na modularnost, skalabilnost i bezbednost. Arhitektura je prilagođena potrebama pozorišta: online pristup gledaocima, interno upravljanje za zaposlene i integracija sa eksternim servisima (plaćanja, email).
 
-\subsection{Predložena Arhitektura Sistema}
-
 Koristi se \textbf{višeslojna arhitektura} (3-tier arhitektura) za organizaciju. Sistem je podeljen na slojeve radi lakšeg održavanja i proširivanja. Predlažemo implementaciju kao web-aplikaciju sa mobilnom podrškom za gledaoce, koristeći moderne tehnologije (npr. React za frontend, Node.js/Express za backend, PostgreSQL za bazu).
 
-\subsubsection{Sloj Korisničkog Interfejsa (Presentation Layer)}
+\subsection{Sloj Korisničkog Interfejsa (Presentation Layer)}
 \textbf{Opis:} Interfejsi za interakciju sa korisnicima (gledaoci, zaposleni).
 
 \textbf{Komponente:}
@@ -21,7 +19,7 @@ Koristi se \textbf{višeslojna arhitektura} (3-tier arhitektura) za organizaciju
 
 \textbf{Bezbednost:} HTTPS, autentifikacija (OAuth/JWT), uloge (gledalac, zaposleni).
 
-\subsubsection{Sloj Poslovne Logike (Application/Business Layer)}
+\subsection{Sloj Poslovne Logike (Application/Business Layer)}
 \textbf{Opis:} Obrada zahteva, validacija i poslovna pravila.
 
 \textbf{Komponente/Moduli:}
@@ -38,7 +36,7 @@ Koristi se \textbf{višeslojna arhitektura} (3-tier arhitektura) za organizaciju
 
 \textbf{Integracije:} API za plaćanja, email servisi (SendGrid), kalendar servisi za termine.
 
-\subsubsection{Sloj Podataka (Data Layer)}
+\subsection{Sloj Podataka (Data Layer)}
 \textbf{Opis:} Čuvanje i pristup podacima.
 
 \textbf{Komponente:}
