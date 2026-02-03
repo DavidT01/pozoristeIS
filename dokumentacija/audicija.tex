@@ -4,7 +4,7 @@
 Reditelj vrši pregled i ocenjivanje kandidata kako bi popunio upražnjeno radno mesto za određenu ulogu ili predstavu.
 \subsubsection*{Akteri}
 \begin{itemize}
-    \item \textbf{Reditelj} -- osoba koja ocenjuje Glumca i zapošljava.
+    \item \textbf{Reditelj} -- osoba koja ocenjuje i zapošljava glumca.
      \item \textbf{Glumac} -- osoba koja se prijavljuje za posao.
 \end{itemize}
 
@@ -12,26 +12,25 @@ Reditelj vrši pregled i ocenjivanje kandidata kako bi popunio upražnjeno radno
 \begin{itemize}
     \item Raspisana je audicija za određenu ulogu.
     \item Lista prijavljenih kandidata postoji u sistemu.
-     \item Reditelj je ulogovan u sistem.
+    \item Reditelj je ulogovan u sistem.
      
-    
 \end{itemize}
 
 \subsubsection*{Postuslovi}
 \begin{itemize}
     \item Glumac je ocenjen.
-    \item Status kandidata je promenjen ( "Primljen", "Odbijen", "Uži krug").
+    \item Status kandidata je promenjen ("Primljen", "Odbijen", "Uži krug").
 \end{itemize}
 
 \subsubsection*{Osnovni tok}
 \begin{enumerate}
-    \item Reditelj bira opciju za pregled zakazanih audicija i sistem mu prikazuje listu prijavljenih Glumaca za taj dan.
-    \item Reditelj bira konkretnog Glumca sa liste koji je trenutno na redu (ulazi u prostoriju).
-    \item Sistem prikazuje detalje o Glumcu (CV, prethodno iskustvo, slika).
+    \item Reditelj bira opciju za pregled zakazanih audicija i sistem mu prikazuje listu prijavljenih glumaca za taj dan.
+    \item Reditelj bira konkretnog glumca sa liste koji je trenutno na redu (ulazi u prostoriju).
+    \item Sistem prikazuje detalje o glumcu (CV, prethodno iskustvo, slika).
     \item Glumac izvodi zadatu tačku (monolog, scena).
     \item Reditelj u sistem unosi beleške (komentare o performansu) i numeričku ocenu (1-10).
-    \item Reditelj označava status Glumca ( "Primljen", "Odbijen" ili "Uži krug").
-    \item Sistem čuva podatke i ažurira status audicije za tog Glumca.
+    \item Reditelj označava status glumca ( "Primljen", "Odbijen" ili "Uži krug").
+    \item Sistem čuva podatke i ažurira status audicije za tog glumca.
 \end{enumerate}
 
 \subsubsection*{Podtokovi: /}
@@ -40,7 +39,7 @@ Reditelj vrši pregled i ocenjivanje kandidata kako bi popunio upražnjeno radno
 
 \textbf{A1: Glumac se nije pojavio}
 \begin{itemize}
-    \item U koraku 2 osnovnog toka kada Reditelj proziva Glumca koji se nije pojavio onda Reditelj označava kandidata kao "Nije prisustvovao". Sistem ga automatski diskvalifikuje.
+    \item U koraku 2 osnovnog toka kada reditelj proziva glumca koji se nije pojavio, onda reditelj označava kandidata kao "Nije prisustvovao". Sistem ga automatski diskvalifikuje.
 \end{itemize}
 
 \subsubsection*{Specijalni zahtevi: /}

@@ -30,20 +30,20 @@ Gledalac kupuje karte za odabranu predstavu na blagajni.
     \item Gledalac bira sedišta.
     \item Blagajnik potvrđuje izbor.
     \item Sistem prikazuje ukupan iznos i opcije plaćanja.
-    \item Blagajnik pita Gledaoca da li mu treba gotovinski račun:
+    \item Blagajnik pita gledaoca da li mu treba gotovinski račun:
     \begin{itemize}
-        \item Ukoliko Gledalac traži gotovinski račun $\rightarrow$ Izvršava se podtok \textbf{P1}.
+        \item Ukoliko gledalac traži gotovinski račun $\rightarrow$ Izvršava se podtok \textbf{P1}.
     \end{itemize}
     \item Gledalac bira način plaćanja:
     \begin{itemize}
-        \item Ukoliko Gledalac bira plaćanje gotovinom $\rightarrow$ Izvršava se podtok \textbf{P2}.
-        \item Ukoliko Gledalac bira plaćanje karticom $\rightarrow$ Izvršava se podtok \textbf{P3}.
+        \item Ukoliko gledalac bira plaćanje gotovinom $\rightarrow$ Izvršava se podtok \textbf{P2}.
+        \item Ukoliko gledalac bira plaćanje karticom $\rightarrow$ Izvršava se podtok \textbf{P3}.
     \end{itemize}
     \item Blagajnik zaključuje račun.
     \item Sistem automatski evidentira transakciju.
     \item Sistem ažurira broj slobodnih mesta.
     \item Sistem izdaje račun.
-    \item Blagajnik predaje račun i karte Gledaocu.
+    \item Blagajnik predaje račun i karte gledaocu.
 \end{enumerate}
 
 \subsubsection*{Podtokovi}
@@ -56,7 +56,7 @@ Gledalac kupuje karte za odabranu predstavu na blagajni.
 
 \textbf{P2: Plaćanje gotovinom}
 \begin{enumerate}
-    \item Gledalac predaje novac Blagajniku.
+    \item Gledalac predaje novac blagajniku.
     \item Blagajnik unosi iznos u sistem.
     \item Sistem računa kusur i prikazuje ga.
     \item Blagajnik vraća kusur.
@@ -65,7 +65,7 @@ Gledalac kupuje karte za odabranu predstavu na blagajni.
 \textbf{P3: Plaćanje karticom}
 \begin{enumerate}
     \item Blagajnik označava opciju za plaćanje karticom.
-    \item Blagajnik pruža terminal Gledaocu.
+    \item Blagajnik pruža terminal gledaocu.
     \item Gledalac prislanja ili ubacuje karticu i unosi PIN.
     \item Sistem šalje zahtev banci i čeka potvrdu.
     \item Sistem dobija potvrdu o uspešnoj transakciji i evidentira plaćanje.
@@ -76,7 +76,7 @@ Gledalac kupuje karte za odabranu predstavu na blagajni.
 
 \textbf{A1: Nema dostupnih karata}
 \begin{itemize}
-    \item Sistem obaveštava Blagajnika da nema dostupnih karata za izabranu predstavu. Blagajnik nudi druge termine Gledaocu i ako je on zainteresovan slučaj se vraća na korak 4.
+    \item Sistem obaveštava blagajnika da nema dostupnih karata za izabranu predstavu. Blagajnik nudi druge termine gledaocu i ako je on zainteresovan slučaj se vraća na korak 4.
 \end{itemize}
 
 \textbf{A2: Kupac odustaje od kupovine}
@@ -90,9 +90,9 @@ Gledalac kupuje karte za odabranu predstavu na blagajni.
     \item Sistem prikazuje poruku o grešci (npr. pogrešan PIN, nedovoljno sredstava).
     \item Blagajnik pita kupca da li želi da pokuša ponovo.
     \begin{itemize}
-        \item Ako Gledalac želi ponovni pokušaj $\rightarrow$ Povratak na korak P3.3.
-        \item Ako Gledalac želi drugi način plaćanja $\rightarrow$ Povratak na korak 10 Osnovnog toka.
-        \item Ako Gledalac odustane $\rightarrow$ Prelazak na alternativni tok A2.
+        \item Ako gledalac želi ponovni pokušaj $\rightarrow$ Povratak na korak P3.3.
+        \item Ako gledalac želi drugi način plaćanja $\rightarrow$ Povratak na korak 10 Osnovnog toka.
+        \item Ako gledalac odustane $\rightarrow$ Prelazak na alternativni tok A2.
     \end{itemize}
 \end{itemize}
 
